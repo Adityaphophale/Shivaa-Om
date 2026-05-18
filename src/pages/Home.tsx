@@ -116,7 +116,7 @@ export default function Home() {
           className="flex whitespace-nowrap gap-16 items-center"
         >
           {Array(15).fill([
-            "IEC REGISTERED", "AGRO COMMODITIES", "ELECTRIC MOBILITY", "CHEMICALS", "MERCHANT TRADING", "NAVY MUMBAI HUB"
+            "IEC REGISTERED", "AGRO COMMODITIES", "ELECTRIC MOBILITY", "CHEMICALS", "MERCHANT TRADING", "NAVI MUMBAI HUB"
           ]).flat().map((item, i) => (
             <div key={i} className="flex items-center gap-4">
               <ShieldCheck className="w-4 h-4 text-brand-green-deep" />
