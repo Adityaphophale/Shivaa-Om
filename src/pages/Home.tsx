@@ -49,9 +49,12 @@ export default function Home() {
               </Link>
               <Link to="/products" className="w-full sm:w-auto">
               
-                <Button variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-brand-green-deep px-10 h-16 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] rounded-none transition-all">
-                  Catalog
-                </Button>
+                <Button
+  variant="outline"
+  className="w-full sm:w-auto border-white text-brand-gold hover:bg-white hover:text-brand-green-deep px-10 h-16 text-sm sm:text-base font-bold uppercase tracking-[0.08em] sm:tracking-[0.15em] rounded-none transition-all"
+>
+  Catalog
+</Button>
               </Link>
             </div>
           </motion.div>
