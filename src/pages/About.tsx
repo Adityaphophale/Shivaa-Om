@@ -79,7 +79,7 @@ export default function About() {
               { icon: Zap, title: "Efficient Logistics", desc: "Timely delivery is at our core. We optimize routes and handle documentation for seamless transitions." },
               { icon: Handshake, title: "Trust & Ethics", desc: "Built on transparency, our relationships with verified suppliers and buyers are designed for the long term." },
               { icon: Globe2, title: "Global Network", desc: "Strong presence in India, Africa, and China gives us an edge in sourcing and distribution." },
-              { icon: Target, title: "Market Expertise", desc: "Deep understanding of agro commodities and industrial chemicals ensures we navigate markets effectively." },
+              { icon: Target, title: "Market Expertise", desc: "Deep understanding of agro commodities, industrial chemicals, and electric mobility solutions enables us to navigate markets effectively." },
               { icon: Globe2, title: "Customized Solutions", desc: "Flexible trade solutions tailored to meet specific industrial requirements and manufacturing needs." }
             ].map((feature, i) => (
               <div key={i} className="premium-card min-h-[300px]">
