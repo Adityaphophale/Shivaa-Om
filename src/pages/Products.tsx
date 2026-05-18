@@ -20,7 +20,7 @@ interface Product {
 
 const PRODUCTS: Product[] = [
   { id: 1, name: "ZENITH ENA", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "High-grade neutral alcohol suitable for beverage, cosmetic, and pharmaceutical industries.", image: "/ENA.jpeg" },
-  { id: 2, name: "White Refined Sugar (S30)", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "Grade S30 refined white sugar, high purity, essential for food and beverage manufacturing.", image: "/Rsugar.png" },
+  { id: 2, name: "OM Harvesh White Refined Sugar (S30)", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "Grade S30 refined white sugar, high purity, essential for food and beverage manufacturing.", image: "/Rsugar.png" },
   { id: 3, name: "OMHARVEST Brown Sugar", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "Rich molasses-infused brown sugar for baking and confectionery.", image: "/Bsugar.png" },
   { id: 4, name: "ZENITH MOLASSES ", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "High-quality sugarcane molasses for distillation and industrial use.", image: "/Molasses.png" },
   { id: 5, name: "SHIVAA E-Rickshaws", category: "Electric Mobility", origin: "India", route: "India → Africa", desc: "Certified high-efficiency electric three-wheelers for sustainable urban transport.", image: "/Erickshaw.png" },
