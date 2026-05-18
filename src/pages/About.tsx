@@ -106,13 +106,13 @@ export default function About() {
                  As part of our long-term growth strategy, Shivaa Om Globe Trade plans to expand into additional sectors to serve our global clientele better.
                </p>
             </div>
-            <div className="lg:w-1/2 grid grid-cols-2 gap-4">
+            <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                {[
                  "Petrochemicals", "Specialty Chemicals", "Advanced EVs", "Industrial Raw Materials", "Energy Commodities", "Allied Trading"
                ].map(item => (
-                 <div key={item} className="bg-white p-4 border border-brand-green-forest/5 text-xs font-bold uppercase tracking-widest text-brand-green-forest flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-brand-gold rounded-full" />
-                    {item}
+                 <div key={item} className="bg-white p-4 border border-brand-green-forest/5 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-brand-green-forest flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 bg-brand-gold rounded-full shrink-0" />
+                    <span className="leading-tight">{item}</span>
                  </div>
                ))}
             </div>
