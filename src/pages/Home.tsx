@@ -26,30 +26,30 @@ export default function Home() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="z-10"
+            className="z-10 w-full"
           >
-            <div className="uppercase tracking-[0.4em] text-[10px] font-bold text-brand-gold mb-10 opacity-80">
+            <div className="uppercase tracking-[0.4em] text-[10px] font-bold text-brand-gold mb-6 lg:mb-10 opacity-80 text-center lg:text-left">
               International Trade · Corporate Profile · India
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-9xl leading-[0.85] mb-8 font-medium tracking-tighter drop-shadow-lg">
-              Trading <br />
+            <h1 className="text-5xl sm:text-6xl lg:text-9xl leading-tight lg:leading-[0.85] mb-8 font-medium tracking-tighter drop-shadow-lg text-center lg:text-left">
+              Trading <br className="hidden lg:block" />
               With <span className="text-brand-gold font-bold uppercase tracking-wide">
   TRUST
-</span> <br />
+</span> <br className="hidden lg:block" />
               Globally
             </h1>
-            <p className="max-w-md text-brand-off-white/70 text-sm leading-relaxed mb-12 border-l border-brand-gold/30 pl-6">
+            <p className="max-w-md mx-auto lg:mx-0 text-brand-off-white/70 text-sm md:text-base leading-relaxed mb-10 border-l border-brand-gold/30 pl-6 text-center lg:text-left">
               Shivaa Om Globe Trade Pvt. Ltd. facilitates the seamless flow of agro-commodities and industrial chemicals across the world's most dynamic trade corridors.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/enquiry">
-                <Button className="bg-brand-gold text-brand-green-deep hover:bg-white px-10 h-16 text-[10px] font-bold uppercase tracking-[0.2em] rounded-none shadow-2xl transition-all">
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4">
+              <Link to="/enquiry" className="w-full sm:w-auto">
+                <Button className="w-full sm:w-auto bg-brand-gold text-brand-green-deep hover:bg-white px-10 h-16 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] rounded-none shadow-2xl transition-all">
                   Get Quote <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <Link to="/products">
+              <Link to="/products" className="w-full sm:w-auto">
               
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-brand-green-deep px-10 h-16 text-[10px] font-bold uppercase tracking-[0.2em] rounded-none transition-all">
+                <Button variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-brand-green-deep px-10 h-16 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] rounded-none transition-all">
                   Catalog
                 </Button>
               </Link>
@@ -61,33 +61,33 @@ export default function Home() {
           </div>
         </div>
         
-        <div className="hidden lg:grid grid-rows-[1.2fr_0.8fr]">
-          <div className="relative overflow-hidden group">
+        <div className="flex flex-col lg:grid lg:grid-rows-[1.2fr_0.8fr]">
+          <div className="relative overflow-hidden group min-h-[400px] lg:min-h-0">
              <video 
                src="/hero1.mp4" 
                autoPlay
                loop
                muted
                playsInline
-               className="object-cover h-full w-full group-hover:scale-110 transition-transform duration-1000"
+               className="object-cover absolute inset-0 h-full w-full group-hover:scale-110 transition-transform duration-1000"
              />
              <div className="absolute inset-0 bg-black/45 group-hover:bg-black/35 transition-colors" />
-             <div className="absolute inset-0 p-12 flex flex-col justify-between border-l border-white/10">
+             <div className="absolute inset-0 p-8 sm:p-12 flex flex-col justify-between border-l border-white/10">
                 <div className="w-16 h-1 border-t-2 border-brand-gold"></div>
                 <div>
                    <span className="text-brand-gold text-[10px] font-bold uppercase tracking-widest block mb-4">Core Connectivity</span>
-                   <h2 className="text-4xl text-white font-medium leading-tight uppercase font-display tracking-tight">
+                   <h2 className="text-3xl sm:text-4xl text-white font-medium leading-tight uppercase font-display tracking-tight">
                      Linking Asia, <br /> Africa & India
                    </h2>
                 </div>
              </div>
           </div>
-          <div className="bg-brand-beige p-12 border-l border-brand-green-forest/5">
+          <div className="bg-brand-beige p-8 sm:p-12 border-l border-brand-green-forest/5">
              <div className="magazine-header !mb-6">
                 <span>The Ledger</span>
                 <span>Real-Time Stats</span>
              </div>
-             <div className="grid grid-cols-2 gap-x-12 gap-y-6">
+             <div className="grid grid-cols-2 gap-x-6 sm:gap-x-12 gap-y-6">
                 {STATS.map((stat, i) => (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
