@@ -1,0 +1,73 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Global Helpers
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    // Validation Helpers
+    function isValidProduct(data) {
+      return data.keys().hasAll(['name', 'category', 'description']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 200 &&
+             data.category in ['Agro Commodities', 'Electric Mobility', 'Industrial Products', 'Chemicals', 'Polymers'] &&
+             data.description is string && data.description.size() <= 5000;
+    }
+
+    function isValidInquiry(data) {
+      return data.keys().hasAll(['name', 'email', 'message', 'createdAt', 'status']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.email is string && data.email.matches('^.+@.+$') &&
+             data.message is string && data.message.size() > 0 && data.message.size() <= 2000 &&
+             data.status in ['New', 'Read', 'Replied'] &&
+             data.createdAt == request.time;
+    }
+
+    // Collections
+    match /products/{productId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin() && isValidId(productId) && isValidProduct(incoming());
+      allow update: if isAdmin() && isValidProduct(incoming()) && 
+                    incoming().diff(existing()).affectedKeys().hasOnly(['name', 'category', 'description', 'specifications', 'origin', 'route', 'imageUrl']);
+      allow delete: if isAdmin();
+    }
+
+    match /blogs/{blogId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin() && isValidId(blogId);
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /trade_activities/{activityId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin() && isValidId(activityId);
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /inquiries/{inquiryId} {
+      allow get: if isAdmin();
+      allow list: if isAdmin();
+      allow create: if isValidId(inquiryId) && isValidInquiry(incoming());
+      allow update: if isAdmin() && 
+                    incoming().diff(existing()).affectedKeys().hasOnly(['status']);
+      allow delete: if isAdmin();
+    }
+
+    match /admins/{adminId} {
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == adminId);
+      allow write: if false; // Admins must be set manually for security
+    }
+  }
+}

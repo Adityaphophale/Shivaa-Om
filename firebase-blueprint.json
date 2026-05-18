@@ -1,0 +1,96 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Export/Import products",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string", "enum": ["Agro Commodities", "Electric Mobility", "Industrial Products", "Chemicals", "Polymers"] },
+        "description": { "type": "string" },
+        "specifications": { "type": "string" },
+        "origin": { "type": "string" },
+        "route": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "category", "description"]
+    },
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "Customer enquiries",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "company": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "country": { "type": "string" },
+        "productInterest": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["New", "Read", "Replied"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "message"]
+    },
+    "Blog": {
+      "title": "Blog",
+      "description": "News and trade insights",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "category": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "publishedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content"]
+    },
+    "TradeActivity": {
+      "title": "TradeActivity",
+      "description": "Highlights of trade events and shipments",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string" },
+        "type": { "type": "string" },
+        "imageUrl": { "type": "string" }
+      },
+      "required": ["title", "date"]
+    }
+  },
+  "firestore": {
+    "products": {
+      "schema": "Product",
+      "description": "Collection of products"
+    },
+    "inquiries": {
+      "schema": "Inquiry",
+      "description": "Collection of visitor enquiries"
+    },
+    "blogs": {
+      "schema": "Blog",
+      "description": "Trade news and blog posts"
+    },
+    "trade_activities": {
+      "schema": "TradeActivity",
+      "description": "Trade activity feed"
+    },
+    "admins": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" }
+        }
+      },
+      "description": "List of admin UIDs"
+    }
+  }
+}
