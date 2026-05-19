@@ -3,10 +3,9 @@ import { Calendar, MapPin, Tag, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ACTIVITIES = [
-  { id: 1, title: "Successful Shipment of ENA to West Africa", date: "May 10, 2026", type: "Shipment", location: "Mumbai Port", desc: "Completed the export of 50,000 liters of Extra Neutral Alcohol to a major distillery partner in Nigeria." },
+  { id: 1, title: "Successful Shipment of ENA to West Africa", date: "May 10, 2026", type: "Shipment", location: "Mumbai Port", desc: "Successfully completed the export of 1.2 million liters of Extra Neutral Alcohol (ENA) to strategic partners across Tanzania, Kenya, Rwanda, and the Democratic Republic of Congo." },
   { id: 2, title: "Trade Delegation Visit - China Chemicals Expo", date: "April 22, 2026", type: "Exhibition", location: "Shanghai, China", desc: "Our sourcing team visited the Shanghai Chemicals Expo to strengthen ties with food-grade acid manufacturers." },
-  { id: 3, title: "New Partnership for E-Rickshaw Distribution", date: "March 15, 2026", type: "Partnership", location: "Navi Mumbai", desc: "Signed a distribution agreement for spreading Indian E-Rickshaw technology across East African urban centers." },
-  { id: 4, title: "Warehouse Expansion - Kamothe Facility", date: "February 05, 2026", type: "Facility", location: "Navi Mumbai", desc: "Upgraded our storage capacity to better handle bulk polymer shipments and agro commodities." }
+  { id: 3, title: "New Partnership for E-Rickshaw Distribution", date: "March 15, 2026", type: "Partnership", location: "Navi Mumbai", desc: "Signed a distribution agreement to expand Indian E-Rickshaw technology across key East and Central African urban centers." }
 ];
 
 export default function TradeActivities() {

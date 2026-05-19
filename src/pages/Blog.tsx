@@ -23,10 +23,10 @@ const POSTS = [
     id: 2,
     title: "The Rising Demand for Indian E-Rickshaws in Africa",
     excerpt:
-      "How electric mobility is transforming last-mile transport in African urban centers and why Indian technology is best suited for this shift.",
+      "Exploring how electric mobility is transforming last-mile transportation across African urban centers and why Indian E-Rickshaw technology is ideally suited to support this transition. ",
     category: "Electric Mobility",
     date: "May 08, 2026",
-    author: "Praatik M.",
+    author: "Shivaa Om Globe Trade Team",
   },
 
   {
@@ -41,9 +41,9 @@ const POSTS = [
 
   {
     id: 4,
-    title: "Shipping Trends: Navi Mumbai to West African Ports",
+    title: "Shipping Trends: JNPT - Navi Mumbai to East and Central Africa",
     excerpt:
-      "Exploring the most efficient shipping routes and how Navi Mumbai acts as a critical hub for international merchant trading.",
+      "Exploring the most efficient shipping routes and how JNPT - Navi Mumbai acts as a critical Hub for International merchant trading.",
     category: "Logistics",
     date: "April 15, 2026",
     author: "Trade News",

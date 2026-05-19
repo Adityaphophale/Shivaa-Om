@@ -214,20 +214,33 @@ export default function Home() {
          <div className="editorial-split bg-white border border-brand-green-forest/10 p-0 overflow-hidden">
             <div className="p-12 lg:p-24 flex flex-col justify-center">
                <span className="text-brand-green-forest/40 text-[10px] font-bold uppercase tracking-[0.4em] block mb-8">Our Presence</span>
-                  <h2 className="text-3xl sm:text-4xl lg:text-6xl font-medium mb-8 leading-tight">Navi Mumbai <br /><span className="text-brand-gold">Global Gateway</span></h2>
+                  <h2 className="text-3xl sm:text-4xl lg:text-6xl font-medium mb-8 leading-tight">JNPT - Navi Mumbai  <br /><span className="text-brand-gold">Global Gateway</span></h2>
                <p className="text-brand-green-deep/60 text-sm leading-relaxed mb-12 max-w-md">
-                 Strategically located in Kamothe, Panvel, we leverage India's massive maritime infrastructure to connect with partners across Africa and China.
+                 Strategically located in Navi Mumbai, we leverage India's massive maritime infrastructure to connect with partners across East Africa, Central Africa and China.
                </p>
-               <div className="flex gap-4">
-                  <div className="bg-brand-beige p-6 space-y-2 flex-grow">
-                     <p className="text-[10px] font-bold uppercase tracking-widest text-brand-green-forest/40">Regional Office</p>
-                     <p className="text-xs font-bold text-brand-green-deep uppercase">Navi Mumbai, India</p>
-                  </div>
-                  <div className="bg-brand-beige p-6 space-y-2 flex-grow">
-                     <p className="text-[10px] font-bold uppercase tracking-widest text-brand-green-forest/40">Hub Focus</p>
-                     <p className="text-xs font-bold text-brand-green-deep uppercase">JNPT · Panvel · EXIM</p>
-                  </div>
-               </div>
+               <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4">
+
+  <div className="bg-brand-beige p-6">
+    <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-green-forest/40 mb-4">
+      Regional Office
+    </p>
+
+    <p className="text-base font-bold text-brand-green-deep uppercase leading-relaxed">
+      Navi Mumbai, India
+    </p>
+  </div>
+
+  <div className="bg-brand-beige p-6">
+    <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-green-forest/40 mb-4">
+      Hub Focus
+    </p>
+
+    <p className="text-sm font-bold text-brand-green-deep uppercase leading-[2]">
+      JNPT - Kandla - Mundra - Dar Es Salaam - Mombasa - Matadi
+    </p>
+  </div>
+
+</div>
             </div>
             <div className="bg-brand-green-forest relative min-h-[400px]">
                <Map className="absolute inset-0 w-full h-full text-brand-gold/10 p-12 animate-pulse" />

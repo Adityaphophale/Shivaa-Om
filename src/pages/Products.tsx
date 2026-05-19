@@ -20,8 +20,8 @@ interface Product {
 
 const PRODUCTS: Product[] = [
   { id: 1, name: "ZENITH ENA", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "High-grade Extra Neutral Alcohol (96%) suitable for beverage, pharmaceutical, cosmetic, personal care, perfumery, food processing, and industrial applications.", image: "/ENA.jpeg" },
-  { id: 2, name: "OM Harvesh White Refined Sugar (S30)", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "Grade S30 refined white sugar, high purity, essential for food and beverage manufacturing.", image: "/Rsugar.png" },
-  { id: 3, name: "OMHARVEST Brown Sugar", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "Rich molasses-infused brown sugar for baking and confectionery.", image: "/Bsugar.png" },
+  { id: 2, name: "OM HARVEST White Refined Sugar (S30)", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "Grade S30 refined white sugar, high purity, essential for food and beverage manufacturing.", image: "/Rsugar.png" },
+  { id: 3, name: "OM HARVEST Brown Sugar", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "Rich molasses-infused brown sugar for baking and confectionery.", image: "/Bsugar.png" },
   { id: 4, name: "ZENITH MOLASSES ", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "High-quality sugarcane molasses for distillation and industrial use.", image: "/Molasses.png" },
   { id: 5, name: "SHIVAA E-Rickshaws", category: "Electric Mobility", origin: "India", route: "India → Africa", desc: "Certified high-efficiency electric three-wheelers for sustainable urban transport.", image: "/Erickshaw.png" },
   { id: 6, name: "SHIVAA E-Bikes", category: "Electric Mobility", origin: "India", route: "India → Africa", desc: "Modern electric bicycles and scooters designed for the African landscape.", image: "/Ebike.png" },
