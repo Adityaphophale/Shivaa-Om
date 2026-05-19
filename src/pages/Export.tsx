@@ -36,7 +36,9 @@ export default function Export() {
                 <div className="w-20 h-20 bg-brand-gold/90 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
                   <Ship className="w-10 h-10 text-brand-green-deep" />
                 </div>
-                <h3 className="text-2xl text-white font-display font-bold uppercase tracking-widest">Voyage Of TRUST</h3>
+                <h3 className="text-3xl md:text-4xl text-white font-display font-bold uppercase tracking-[0.25em] drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+  Voyage Of Trust
+</h3>
               </div>
             </div>
           </div>
