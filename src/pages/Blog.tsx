@@ -16,7 +16,7 @@ const POSTS = [
       "At Shivaa Om Globe Trade Pvt. Ltd., we believe international trade is built on trust, quality, and commitment. As a dynamic global trading company, we provide reliable import-export solutions that meet international standards. We are committed to building long-term partnerships and connecting global markets through professionalism, integrity, and reliable trade solutions.",
     category: "Corporate Profile",
     date: "May 18, 2026",
-    author: "Praatik Chhandrakant Mhamunkar",
+    author: "Executive Director",
   },
 
   {
@@ -124,11 +124,11 @@ export default function Blog() {
             <div className="border-t border-brand-green-forest/10 pt-6">
 
               <h4 className="text-lg font-bold text-brand-green-forest">
-                Praatik Chhandrakant Mhamunkar
+                Executive Director 
               </h4>
 
               <p className="uppercase tracking-[0.25em] text-[10px] font-bold text-brand-green-deep/50 mt-2">
-                Executive Director · Shivaa Om Globe Trade Pvt. Ltd.
+                 Shivaa Om Globe Trade Pvt. Ltd.
               </p>
             </div>
 
