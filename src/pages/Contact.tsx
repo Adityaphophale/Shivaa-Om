@@ -44,7 +44,7 @@ export default function Contact() {
                   </h4>
 
                   <p className="text-sm font-semibold text-brand-green-deep">
-                    Office No. 24, Jay Ganesh Ji CHS, Plot No. 34, Sector 36,
+                    Office Number 9, Jay Ganesh Ji CHS, Plot No. 34, Sector 36,
                     Kamothe, Panvel, Navi Mumbai – 410209
                   </p>
                 </div>

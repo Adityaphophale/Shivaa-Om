@@ -72,7 +72,7 @@ export default function Footer() {
                  </div>
                  <div className="text-sm">
                     <p className="font-semibold text-white">Head Office</p>
-                    <p className="text-brand-off-white/60">Office No. 24, Jay Ganesh Ji CHS, Plot No. 34, Sector 36, Kamothe, Panvel, Navi Mumbai – 410209</p>
+                    <p className="text-brand-off-white/60">Office Number 9, Jay Ganesh Ji CHS, Plot No. 34, Sector 36, Kamothe, Panvel, Navi Mumbai – 410209</p>
                  </div>
               </div>
               <div className="flex gap-4">
