@@ -60,7 +60,7 @@ export default function Navbar() {
           {/* LOGO */}
           <div className="relative shrink-0">
             <img
-              src="/logo.png"
+              src="/logo-1.png"
               alt="Shivaa Om Globe Trade"
               className="w-14 h-14 lg:w-16 lg:h-16 object-contain transition-all duration-300 group-hover:scale-105"
             />
