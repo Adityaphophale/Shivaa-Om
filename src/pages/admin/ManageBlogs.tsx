@@ -124,7 +124,7 @@ export default function ManageBlogs() {
              <p className="text-xs text-brand-green-deep/40 font-semibold uppercase tracking-wider mt-1">Manage corporate news and market updates</p>
           </div>
           <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <DialogTrigger asChild>
+            <DialogTrigger>
               <Button onClick={() => openModal()} className="bg-brand-green-forest text-white rounded-none uppercase text-[10px] font-bold tracking-widest h-12 px-8">
                  <Plus className="w-4 h-4 mr-2" /> New Publication
               </Button>
