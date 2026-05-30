@@ -27,7 +27,8 @@ export default function ManageBlogs() {
   const fetchBlogs = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/blogs', { credentials: 'same-origin' });
+      const API_URL = import.meta.env.VITE_API_URL || '';
+      const res = await fetch(`${API_URL}/api/blogs`, { credentials: 'same-origin' });
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       setBlogs(data);
@@ -83,7 +84,8 @@ export default function ManageBlogs() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const url = currentBlog ? `/api/blogs/${currentBlog.id}` : '/api/blogs';
+      const API_URL = import.meta.env.VITE_API_URL || '';
+      const url = currentBlog ? `${API_URL}/api/blogs/${currentBlog.id}` : `${API_URL}/api/blogs`;
       const method = currentBlog ? 'PUT' : 'POST';
       
       const res = await fetch(url, {
@@ -106,7 +108,8 @@ export default function ManageBlogs() {
   const handleDelete = async (id: number) => {
     if (!confirm("Are you sure you want to delete this blog post?")) return;
     try {
-      const res = await fetch(`/api/blogs/${id}`, { method: 'DELETE', credentials: 'same-origin' });
+      const API_URL = import.meta.env.VITE_API_URL || '';
+      const res = await fetch(`${API_URL}/api/blogs/${id}`, { method: 'DELETE', credentials: 'same-origin' });
       if (!res.ok) throw new Error('Failed to delete');
       toast.success("Blog deleted");
       fetchBlogs();

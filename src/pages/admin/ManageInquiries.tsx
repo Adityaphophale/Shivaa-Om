@@ -28,7 +28,8 @@ export default function ManageInquiries() {
     let mounted = true;
     (async () => {
       try {
-        const res = await fetch('/api/enquiries', { credentials: 'same-origin' });
+        const API_URL = import.meta.env.VITE_API_URL || '';
+        const res = await fetch(`${API_URL}/api/enquiries`, { credentials: 'same-origin' });
         if (!res.ok) throw new Error('Failed to fetch');
         const data = await res.json();
         if (!mounted) return;
@@ -44,7 +45,8 @@ export default function ManageInquiries() {
 
   const updateStatus = async (id: string, newStatus: string) => {
     try {
-      const res = await fetch(`/api/enquiries/${id}/status`, {
+      const API_URL = import.meta.env.VITE_API_URL || '';
+      const res = await fetch(`${API_URL}/api/enquiries/${id}/status`, {
         method: 'PUT',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
@@ -62,7 +64,8 @@ export default function ManageInquiries() {
   const deleteInquiry = async (id: string) => {
     if (!confirm("Are you sure you want to delete this inquiry?")) return;
     try {
-      const res = await fetch(`/api/enquiries/${id}`, { method: 'DELETE', credentials: 'same-origin' });
+      const API_URL = import.meta.env.VITE_API_URL || '';
+      const res = await fetch(`${API_URL}/api/enquiries/${id}`, { method: 'DELETE', credentials: 'same-origin' });
       if (!res.ok) throw new Error('Failed to delete');
       setInquiries(prev => prev.filter(i => i.id !== id));
       toast.success('Inquiry deleted');

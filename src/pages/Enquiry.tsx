@@ -25,8 +25,9 @@ export default function Enquiry() {
     e.preventDefault();
     setLoading(true);
     
+    const API_URL = import.meta.env.VITE_API_URL || '';
     try {
-         const res = await fetch('/api/enquiries', {
+         const res = await fetch(`${API_URL}/api/enquiries`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

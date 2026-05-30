@@ -27,7 +27,8 @@ export default function ManageProducts() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/products', { credentials: 'same-origin' });
+      const API_URL = import.meta.env.VITE_API_URL || '';
+      const res = await fetch(`${API_URL}/api/products`, { credentials: 'same-origin' });
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       setProducts(data);
@@ -83,7 +84,8 @@ export default function ManageProducts() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const url = currentProduct ? `/api/products/${currentProduct.id}` : '/api/products';
+      const API_URL = import.meta.env.VITE_API_URL || '';
+      const url = currentProduct ? `${API_URL}/api/products/${currentProduct.id}` : `${API_URL}/api/products`;
       const method = currentProduct ? 'PUT' : 'POST';
       
       const payload = {
@@ -116,7 +118,8 @@ export default function ManageProducts() {
   const handleDelete = async (id: number) => {
     if (!confirm("Are you sure you want to delete this product?")) return;
     try {
-      const res = await fetch(`/api/products/${id}`, { method: 'DELETE', credentials: 'same-origin' });
+      const API_URL = import.meta.env.VITE_API_URL || '';
+      const res = await fetch(`${API_URL}/api/products/${id}`, { method: 'DELETE', credentials: 'same-origin' });
       if (!res.ok) throw new Error('Failed to delete');
       toast.success("Product deleted");
       fetchProducts();
