@@ -39,12 +39,23 @@ export default function Enquiry() {
                message: formData.message,
             })
          });
-         if (!res.ok) throw new Error('Failed to submit');
+         
+         if (!res.ok) {
+            let errorMsg = 'Failed to submit';
+            try {
+               const errData = await res.json();
+               errorMsg = errData.error || errData.errors?.[0]?.msg || errorMsg;
+            } catch (e) {
+               // ignore json parse error
+            }
+            throw new Error(errorMsg);
+         }
+         
          setSuccess(true);
          toast.success("Enquiry sent successfully. Our trade desk will contact you within 24 hours.");
     } catch (error: any) {
          console.error(error);
-         toast.error("Failed to send enquiry. Please try again or contact us via WhatsApp.");
+         toast.error(`Error: ${error.message}. Please try again or contact us via WhatsApp.`);
     } finally {
       setLoading(false);
     }
