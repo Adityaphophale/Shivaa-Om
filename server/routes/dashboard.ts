@@ -4,12 +4,18 @@ import { requireAuth } from '../middleware/auth';
 
 const router = Router();
 
-async function getSafeCount(tableName: string) {
+async function getSafeStatusCount(status: string | null) {
   try {
-    const [result]: any = await pool.execute(`SELECT COUNT(*) as total FROM ${tableName}`);
+    let query = 'SELECT COUNT(*) as total FROM enquiries';
+    let params: any[] = [];
+    if (status) {
+        query += ' WHERE status = ?';
+        params.push(status);
+    }
+    const [result]: any = await pool.execute(query, params);
     return result[0].total;
   } catch (err: any) {
-    return 0; // Return 0 if the table doesn't exist yet
+    return 0;
   }
 }
 
@@ -34,54 +40,24 @@ router.get('/', requireAuth, async (req, res) => {
         phone VARCHAR(50),
         country VARCHAR(100),
         product_interest VARCHAR(255),
-        message TEXT NOT NULL,
+        message TEXT,
+        source_page VARCHAR(255),
         status ENUM('New', 'Contacted', 'Closed') DEFAULT 'New',
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-      )
-    `);
-    await pool.execute(`
-      CREATE TABLE IF NOT EXISTS products (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        slug VARCHAR(255) UNIQUE NOT NULL,
-        description TEXT,
-        category VARCHAR(100),
-        image LONGTEXT,
-        status ENUM('Active', 'Inactive') DEFAULT 'Active',
-        origin VARCHAR(100),
-        route VARCHAR(255),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-      )
-    `);
-    await pool.execute(`
-      CREATE TABLE IF NOT EXISTS blog_posts (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        slug VARCHAR(255) UNIQUE NOT NULL,
-        content LONGTEXT,
-        featured_image LONGTEXT,
-        meta_title VARCHAR(255),
-        meta_description TEXT,
-        status ENUM('Draft', 'Published') DEFAULT 'Draft',
-        publish_date DATE,
-        author VARCHAR(100),
-        category VARCHAR(100),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
 
-    const totalInquiries = await getSafeCount('enquiries');
-    const totalProducts = await getSafeCount('products');
-    const totalBlogs = await getSafeCount('blog_posts');
+    const totalInquiries = await getSafeStatusCount(null);
+    const newInquiries = await getSafeStatusCount('New');
+    const contactedInquiries = await getSafeStatusCount('Contacted');
+    const closedInquiries = await getSafeStatusCount('Closed');
     const recentEnquiries = await getSafeRecentEnquiries();
 
     res.json({
       totalInquiries,
-      totalProducts,
-      totalBlogs,
+      newInquiries,
+      contactedInquiries,
+      closedInquiries,
       recentEnquiries
     });
   } catch (err) {

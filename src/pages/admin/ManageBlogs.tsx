@@ -222,7 +222,7 @@ export default function ManageBlogs() {
                 blogs.map((b) => (
                   <TableRow key={b.id}>
                     <TableCell>
-                      {b.featured_image ? <img src={b.featured_image} alt={b.title} className="w-10 h-10 object-cover rounded border" /> : <div className="w-10 h-10 bg-gray-100 flex items-center justify-center text-gray-400 text-xs"><FileText className="w-5 h-5"/></div>}
+                      {b.featured_image ? <img src={b.featured_image} alt={b.title} loading="lazy" className="w-10 h-10 object-cover rounded border" /> : <div className="w-10 h-10 bg-gray-100 flex items-center justify-center text-gray-400 text-xs"><FileText className="w-5 h-5"/></div>}
                     </TableCell>
                     <TableCell className="font-medium text-brand-green-deep">{b.title}</TableCell>
                     <TableCell>

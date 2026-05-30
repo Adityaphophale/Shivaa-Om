@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Send, CheckCircle2, Loader2, Globe, FileCheck, ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
+import { CheckCircle2, Loader2, Globe, FileCheck, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,6 +38,7 @@ export default function Enquiry() {
                country: formData.country,
                product_interest: formData.productInterest,
                message: formData.message,
+               source_page: window.location.href,
             })
          });
          
@@ -45,9 +46,9 @@ export default function Enquiry() {
             let errorMsg = 'Failed to submit';
             try {
                const errData = await res.json();
-               errorMsg = errData.error || errData.errors?.[0]?.msg || errorMsg;
+               errorMsg = errData.details || errData.error || errData.errors?.[0]?.msg || `HTTP ${res.status} ${res.statusText}`;
             } catch (e) {
-               // ignore json parse error
+               errorMsg = `Server returned ${res.status} ${res.statusText} (Not JSON)`;
             }
             throw new Error(errorMsg);
          }
@@ -55,7 +56,6 @@ export default function Enquiry() {
          setSuccess(true);
          toast.success("Enquiry sent successfully. Our trade desk will contact you within 24 hours.");
     } catch (error: any) {
-         console.error(error);
          toast.error(`Error: ${error.message}. Please try again or contact us via WhatsApp.`);
     } finally {
       setLoading(false);

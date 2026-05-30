@@ -1,9 +1,66 @@
-import { Mail, Phone, MapPin, Send, MessageSquare, Clock } from "lucide-react";
+import { useState } from "react";
+import { motion } from "motion/react";
+import { Mail, Phone, MapPin, Send, MessageSquare, Clock, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { toast } from "sonner";
 
 export default function Contact() {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    country: "",
+    productInterest: "",
+    message: ""
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    const API_URL = import.meta.env.VITE_API_URL || '';
+    try {
+         const res = await fetch(`${API_URL}/api/enquiries`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+               full_name: formData.name,
+               organization: formData.company,
+               email: formData.email,
+               phone: formData.phone,
+               country: formData.country,
+               product_interest: formData.productInterest,
+               message: formData.message,
+               source_page: window.location.href,
+            })
+         });
+         
+         if (!res.ok) {
+            let errorMsg = 'Failed to submit';
+            try {
+               const errData = await res.json();
+               errorMsg = errData.details || errData.error || errData.errors?.[0]?.msg || `HTTP ${res.status} ${res.statusText}`;
+            } catch (e) {
+               errorMsg = `Server returned ${res.status} ${res.statusText} (Not JSON)`;
+            }
+            throw new Error(errorMsg);
+         }
+         
+         setSuccess(true);
+         toast.success("Message sent successfully. Our team will contact you soon.");
+    } catch (error: any) {
+         toast.error(`Error: ${error.message}. Please try again or contact us via WhatsApp.`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="pt-24 pb-16 lg:pb-0">
       <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-12">
@@ -93,48 +150,101 @@ export default function Contact() {
               Direct Message
             </div>
 
-            <form className="space-y-8">
+            {success ? (
+              <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center py-12">
+                 <div className="w-20 h-20 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-8">
+                    <CheckCircle2 className="w-10 h-10 text-brand-green-deep" />
+                 </div>
+                 <h2 className="text-3xl font-display font-medium text-white mb-6">Message Sent</h2>
+                 <p className="text-white/60 text-sm leading-relaxed mb-8">
+                   Thank you for reaching out to Shivaa Om Globe Trade. Your message has been received and a representative will contact you shortly.
+                 </p>
+                 <Button className="bg-brand-gold text-brand-green-deep hover:bg-white h-12 px-8 rounded-none uppercase text-xs font-bold tracking-widest transition-all" onClick={() => setSuccess(false)}>
+                    Send Another Message
+                 </Button>
+              </motion.div>
+            ) : (
+            <form onSubmit={handleSubmit} className="space-y-8">
               
               <div className="grid md:grid-cols-2 gap-8">
                 
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase font-bold tracking-widest text-white/40">
-                    Full Name
+                    Full Name *
                   </label>
 
-                  <Input className="bg-transparent border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                  <Input required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase font-bold tracking-widest text-white/40">
-                    Email Address
+                    Organization *
                   </label>
 
-                  <Input className="bg-transparent border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                  <Input required value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase font-bold tracking-widest text-white/40">
+                    Email Address *
+                  </label>
+
+                  <Input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase font-bold tracking-widest text-white/40">
+                    Phone Number
+                  </label>
+
+                  <Input value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase font-bold tracking-widest text-white/40">
+                    Country *
+                  </label>
+
+                  <Input required value={formData.country} onChange={e => setFormData({...formData, country: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase font-bold tracking-widest text-white/40">
+                    Product Interest *
+                  </label>
+
+                  <Select required onValueChange={(val: string) => setFormData({...formData, productInterest: val})}>
+                    <SelectTrigger className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10">
+                      <SelectValue placeholder="Select Category" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white border-brand-green-forest/10 rounded-none">
+                      <SelectItem value="Agro Commodities">Agro Commodities</SelectItem>
+                      <SelectItem value="Electric Mobility">Electric Mobility</SelectItem>
+                      <SelectItem value="Chemicals">Chemicals</SelectItem>
+                      <SelectItem value="Polymers">Polymers</SelectItem>
+                      <SelectItem value="Merchant Trading">Merchant Trading</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="text-[10px] uppercase font-bold tracking-widest text-white/40">
-                  Organization
+                  Message / Requirements *
                 </label>
 
-                <Input className="bg-transparent border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                <Textarea required value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 min-h-[100px] resize-none" />
               </div>
 
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase font-bold tracking-widest text-white/40">
-                  Message / Requirements
-                </label>
-
-                <Textarea className="bg-transparent border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 min-h-[100px] resize-none" />
-              </div>
-
-              <Button className="w-full h-16 bg-brand-gold text-brand-green-deep hover:bg-white rounded-none uppercase text-xs font-bold tracking-[0.2em] transition-all">
-                Initialize Inquiry
-                <Send className="ml-2 w-4 h-4" />
+              <Button disabled={loading} type="submit" className="w-full h-16 bg-brand-gold text-brand-green-deep hover:bg-white rounded-none uppercase text-xs font-bold tracking-[0.2em] transition-all group">
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Initialize Inquiry <Send className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" /></>}
               </Button>
             </form>
+            )}
           </div>
         </div>
       </section>

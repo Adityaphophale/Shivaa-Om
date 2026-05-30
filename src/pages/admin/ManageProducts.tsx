@@ -232,7 +232,7 @@ export default function ManageProducts() {
                 products.map((p) => (
                   <TableRow key={p.id}>
                     <TableCell>
-                      {p.image ? <img src={p.image} alt={p.name} className="w-10 h-10 object-cover rounded border" /> : <div className="w-10 h-10 bg-gray-100 flex items-center justify-center text-gray-400 text-xs"><Package className="w-5 h-5"/></div>}
+                      {p.image ? <img src={p.image} alt={p.name} loading="lazy" className="w-10 h-10 object-cover rounded border" /> : <div className="w-10 h-10 bg-gray-100 flex items-center justify-center text-gray-400 text-xs"><Package className="w-5 h-5"/></div>}
                     </TableCell>
                     <TableCell className="font-medium text-brand-green-deep">{p.name}</TableCell>
                     <TableCell className="text-xs">{p.category}</TableCell>

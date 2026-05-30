@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import pool from '../db';
 import { body, validationResult } from 'express-validator';
+import pool from '../db';
 import { requireAuth } from '../middleware/auth';
 
 const router = Router();
@@ -15,9 +15,10 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
-    const { full_name, organization, email, phone, country, product_interest, message } = req.body;
+    const { full_name, organization, email, phone, product_interest, message, source_page } = req.body;
+    console.log("Enquiry received:", req.body);
+
     try {
-      // Ensure table exists before inserting
       await pool.execute(`
         CREATE TABLE IF NOT EXISTS enquiries (
           id INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,34 +28,46 @@ router.post(
           phone VARCHAR(50),
           country VARCHAR(100),
           product_interest VARCHAR(255),
-          message TEXT NOT NULL,
-          status ENUM('New', 'Contacted', 'Closed') DEFAULT 'New',
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+          message TEXT,
+          source_page VARCHAR(255),
+          status ENUM('New','Contacted','Closed') DEFAULT 'New',
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
       `);
 
+      // Note: frontend sends 'country' in POST payload as well. Included it here to avoid data loss.
+      const { country } = req.body;
+
       const [result]: any = await pool.execute(
-        `INSERT INTO enquiries (full_name, organization, email, phone, country, product_interest, message) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-        [full_name, organization || null, email, phone || null, country || null, product_interest || null, message]
+        `INSERT INTO enquiries (full_name, organization, email, phone, country, product_interest, message, source_page) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [full_name, organization || null, email, phone || null, country || null, product_interest || null, message, source_page || null]
       );
 
-      // Email notifications disabled per configuration (no SMTP configured).
-      // To enable later, configure SMTP_ env vars and restore nodemailer usage.
-
-      res.status(201).json({ success: true, id: (result as any).insertId });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Server error' });
+      res.status(201).json({ success: true, message: 'Enquiry saved successfully.', id: result.insertId });
+    } catch (error: any) {
+      console.error("Database save failed:", error);
+      res.status(500).json({ error: 'Database save failed', details: error.message });
     }
   }
 );
 
-// Admin routes
+// Admin endpoints for Enquiries
 router.get('/', requireAuth, async (req, res) => {
   try {
     const [rows]: any = await pool.execute('SELECT * FROM enquiries ORDER BY created_at DESC');
     res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.get('/:id', requireAuth, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [rows]: any = await pool.execute('SELECT * FROM enquiries WHERE id = ?', [id]);
+    if (rows.length === 0) return res.status(404).json({ error: 'Enquiry not found' });
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
