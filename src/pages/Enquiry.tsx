@@ -5,8 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { db, handleFirestoreError, OperationType } from "../lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+// replaced Firebase with API POST to /api/enquiries
 import { toast } from "sonner";
 
 export default function Enquiry() {
@@ -27,17 +26,25 @@ export default function Enquiry() {
     setLoading(true);
     
     try {
-      const path = "inquiries";
-      await addDoc(collection(db, path), {
-        ...formData,
-        status: "New",
-        createdAt: serverTimestamp()
-      });
-      setSuccess(true);
-      toast.success("Enquiry sent successfully. Our trade desk will contact you within 24 hours.");
+         const res = await fetch('/api/enquiries', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+               full_name: formData.name,
+               organization: formData.company,
+               email: formData.email,
+               phone: formData.phone,
+               country: formData.country,
+               product_interest: formData.productInterest,
+               message: formData.message,
+            })
+         });
+         if (!res.ok) throw new Error('Failed to submit');
+         setSuccess(true);
+         toast.success("Enquiry sent successfully. Our trade desk will contact you within 24 hours.");
     } catch (error: any) {
-      handleFirestoreError(error, OperationType.CREATE, "inquiries");
-      toast.error("Failed to send enquiry. Please try again or contact us via WhatsApp.");
+         console.error(error);
+         toast.error("Failed to send enquiry. Please try again or contact us via WhatsApp.");
     } finally {
       setLoading(false);
     }

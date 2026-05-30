@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth, db } from "../../lib/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 import { ShieldAlert, LogIn, Loader2 } from "lucide-react";
@@ -11,27 +10,26 @@ import { toast } from "sonner";
 export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
     setLoading(true);
-    const provider = new GoogleAuthProvider();
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      
-      // Check if user is in admins collection
-      const adminDoc = await getDoc(doc(db, "admins", user.uid));
-      
-      if (adminDoc.exists()) {
-        toast.success("Welcome back, Admin.");
-        navigate("/admin");
-      } else {
-        toast.error("Access denied. You are not registered as an administrator.");
-        await auth.signOut();
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      if (!res.ok) {
+        const body = await res.json();
+        throw new Error(body.error || 'Login failed');
       }
-    } catch (error) {
-      console.error(error);
-      toast.error("Authentication failed. Please use your corporate Google account.");
+      toast.success('Welcome back, Admin.');
+      navigate('/admin');
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message || 'Authentication failed.');
     } finally {
       setLoading(false);
     }
@@ -52,13 +50,24 @@ export default function AdminLogin() {
           Secure access for Shivaa Om Globe Trade administrators only. Unauthorized access attempts are logged.
         </p>
         
-        <Button 
-          onClick={handleLogin} 
-          disabled={loading}
-          className="w-full h-14 bg-brand-green-forest text-white hover:bg-brand-green-deep rounded-none uppercase text-xs font-bold tracking-[0.2em] transition-all gap-3"
-        >
-          {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <><LogIn className="w-5 h-5" /> Sign In With Google</>}
-        </Button>
+        <div className="space-y-3">
+          <div className="text-left">
+            <Label className="text-[10px] uppercase font-bold text-brand-green-forest/40">Email</Label>
+            <Input value={email} onChange={(e) => setEmail(e.target.value)} className="h-12 rounded-none" />
+          </div>
+          <div className="text-left">
+            <Label className="text-[10px] uppercase font-bold text-brand-green-forest/40">Password</Label>
+            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="h-12 rounded-none" />
+          </div>
+
+          <Button 
+            onClick={handleLogin} 
+            disabled={loading}
+            className="w-full h-14 bg-brand-green-forest text-white hover:bg-brand-green-deep rounded-none uppercase text-xs font-bold tracking-[0.2em] transition-all gap-3"
+          >
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <><LogIn className="w-5 h-5" /> Sign In</>}
+          </Button>
+        </div>
 
         <div className="mt-8 text-[10px] uppercase tracking-widest text-brand-green-forest/40 font-bold">
            Protected Area · 256-bit Encryption

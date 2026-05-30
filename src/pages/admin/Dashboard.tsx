@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth, db } from "../../lib/firebase";
-import { doc, getDoc } from "firebase/firestore";
 import { 
   LayoutDashboard, 
   Package, 
@@ -32,25 +29,32 @@ export default function Dashboard() {
   const location = useLocation();
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const adminDoc = await getDoc(doc(db, "admins", user.uid));
-        if (adminDoc.exists()) {
-          setIsAdmin(true);
-        } else {
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch('/api/auth/me', { credentials: 'same-origin' });
+        if (!mounted) return;
+        if (!res.ok) {
           setIsAdmin(false);
-          navigate("/admin/login");
+          navigate('/admin/login');
+          return;
         }
-      } else {
+        const body = await res.json();
+        if (body.authenticated) setIsAdmin(true); else { setIsAdmin(false); navigate('/admin/login'); }
+      } catch (err) {
         setIsAdmin(false);
-        navigate("/admin/login");
+        navigate('/admin/login');
       }
-    });
-    return unsub;
+    })();
+    return () => { mounted = false; };
   }, [navigate]);
 
   const handleLogout = async () => {
-    await signOut(auth);
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch (err) {
+      console.error(err);
+    }
     toast.success("Logged out successfully.");
     navigate("/");
   };
@@ -125,14 +129,14 @@ export default function Dashboard() {
             </div>
          </header>
 
-         <div className="p-8 pb-24">
-            <Routes>
-               <Route path="/" element={<DashboardHome />} />
-               <Route path="/inquiries" element={<ManageInquiries />} />
-               <Route path="/products" element={<ManageProducts />} />
-               <Route path="/blogs" element={<ManageBlogs />} />
-            </Routes>
-         </div>
+        <div className="p-8 pb-24">
+          <Routes>
+            <Route path="/" element={<DashboardHome />} />
+            <Route path="/inquiries" element={<ManageInquiries />} />
+            <Route path="/products" element={<ManageProducts />} />
+            <Route path="/blogs" element={<ManageBlogs />} />
+          </Routes>
+        </div>
       </main>
     </div>
   );

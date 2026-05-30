@@ -1,13 +1,42 @@
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { TrendingUp, Users, MessageSquare, Package, ArrowUpRight, ArrowDownRight } from "lucide-react";
 
 export default function DashboardHome() {
+  const [stats, setStats] = useState({
+    totalInquiries: 0,
+    totalProducts: 0,
+    totalBlogs: 0,
+    recentEnquiries: [] as any[]
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch('/api/dashboard', { credentials: 'same-origin' });
+        if (!res.ok) throw new Error('Failed to fetch');
+        const data = await res.json();
+        if (!mounted) return;
+        setStats(data);
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+      }
+    })();
+    return () => { mounted = false; };
+  }, []);
+
   const STATS = [
-    { label: "Total Inquiries", val: "128", icon: MessageSquare, change: "+12%", up: true },
-    { label: "Active Products", val: "14", icon: Package, change: "Stable", up: true },
-    { label: "Market Reach", val: "8 Countries", icon: TrendingUp, change: "+2", up: true },
-    { label: "Lead Conversion", val: "42%", icon: Users, change: "-3%", up: false },
+    { label: "Total Inquiries", val: stats.totalInquiries.toString(), icon: MessageSquare, change: "Live", up: true },
+    { label: "Active Products", val: stats.totalProducts.toString(), icon: Package, change: "Live", up: true },
+    { label: "Published Blogs", val: stats.totalBlogs.toString(), icon: TrendingUp, change: "Live", up: true },
+    { label: "System Status", val: "Online", icon: Users, change: "Stable", up: true },
   ];
+
+  if (loading) return <div className="p-8 text-center font-display uppercase tracking-widest text-brand-green-forest/40">Loading Stats...</div>;
 
   return (
     <div className="space-y-8">
@@ -42,20 +71,18 @@ export default function DashboardHome() {
                <p className="text-xs uppercase tracking-widest text-brand-green-deep/40 font-bold">Analytics Engine Offline in Preview</p>
             </div>
          </div>
-         <div className="bg-white p-8 border border-brand-green-forest/5 shadow-sm">
+         <div className="bg-white p-8 border border-brand-green-forest/5 shadow-sm overflow-y-auto max-h-96">
             <h3 className="text-lg font-display font-medium text-brand-green-forest uppercase tracking-widest mb-8 border-b border-brand-green-forest/5 pb-4">Urgent Ledgers</h3>
             <div className="space-y-6">
-               {[
-                 { name: "ENA Supply Africa", time: "2h ago", status: "Priority" },
-                 { name: "Citric Acid Lot #42", time: "5h ago", status: "Processing" },
-                 { name: "E-Bikes Kenya Order", time: "Yesterday", status: "Shipped" }
-               ].map((item, i) => (
+               {stats.recentEnquiries.length === 0 ? (
+                 <p className="text-sm text-brand-green-deep/50 text-center">No recent inquiries.</p>
+               ) : stats.recentEnquiries.map((item, i) => (
                  <div key={i} className="flex items-center justify-between group">
                     <div>
-                       <p className="text-sm font-semibold text-brand-green-deep">{item.name}</p>
-                       <p className="text-[10px] uppercase font-bold text-brand-green-deep/30">{item.time}</p>
+                       <p className="text-sm font-semibold text-brand-green-deep">{item.full_name || item.organization}</p>
+                       <p className="text-[10px] uppercase font-bold text-brand-green-deep/30">{new Date(item.created_at).toLocaleDateString()}</p>
                     </div>
-                    <span className="text-[9px] font-bold uppercase tracking-widest px-2 py-1 bg-brand-beige border border-brand-green-forest/10 group-hover:bg-brand-gold group-hover:text-brand-green-deep transition-all">
+                    <span className={`text-[9px] font-bold uppercase tracking-widest px-2 py-1 border transition-all ${item.status === 'New' ? 'bg-red-50 text-red-600 border-red-100' : item.status === 'Contacted' ? 'bg-green-50 text-green-600 border-green-100' : 'bg-gray-50 text-gray-600 border-gray-100'}`}>
                        {item.status}
                     </span>
                  </div>

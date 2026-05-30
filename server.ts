@@ -1,12 +1,29 @@
 import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import authRoutes from './server/routes/auth';
+import enquiryRoutes from './server/routes/enquiries';
+import productRoutes from './server/routes/products';
+import blogRoutes from './server/routes/blogs';
+import dashboardRoutes from './server/routes/dashboard';
+
+dotenv.config();
 
 async function startServer() {
   const app = express();
   const PORT = process.env.PORT || 3001;
 
-  app.use(express.json());
+  app.use(express.json({ limit: '50mb' }));
+  app.use(cookieParser());
+
+  // API routes
+  app.use('/api/auth', authRoutes);
+  app.use('/api/enquiries', enquiryRoutes);
+  app.use('/api/products', productRoutes);
+  app.use('/api/blogs', blogRoutes);
+  app.use('/api/dashboard', dashboardRoutes);
 
   // API routes
   app.get("/api/health", (req, res) => {
