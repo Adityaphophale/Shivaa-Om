@@ -15,7 +15,7 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
-    const { full_name, organization, email, phone, product_interest, message, source_page } = req.body;
+    const { full_name, organization, email, phone, country, product_interest, message, source_page } = req.body;
     console.log("Enquiry received:", req.body);
 
     try {
@@ -35,8 +35,9 @@ router.post(
         )
       `);
 
-      // Note: frontend sends 'country' in POST payload as well. Included it here to avoid data loss.
-      const { country } = req.body;
+      // Ensure new columns exist if table was created previously without them
+      await pool.execute(`ALTER TABLE enquiries ADD COLUMN IF NOT EXISTS country VARCHAR(100) NULL`);
+      await pool.execute(`ALTER TABLE enquiries ADD COLUMN IF NOT EXISTS source_page VARCHAR(255) NULL`);
 
       const [result]: any = await pool.execute(
         `INSERT INTO enquiries (full_name, organization, email, phone, country, product_interest, message, source_page) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -56,9 +57,9 @@ router.get('/', requireAuth, async (req, res) => {
   try {
     const [rows]: any = await pool.execute('SELECT * FROM enquiries ORDER BY created_at DESC');
     res.json(rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+  } catch (err: any) {
+    console.error("GET /enquiries error:", err);
+    res.status(500).json({ error: 'Server error', details: err?.message || String(err) });
   }
 });
 
@@ -68,9 +69,9 @@ router.get('/:id', requireAuth, async (req, res) => {
     const [rows]: any = await pool.execute('SELECT * FROM enquiries WHERE id = ?', [id]);
     if (rows.length === 0) return res.status(404).json({ error: 'Enquiry not found' });
     res.json(rows[0]);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+  } catch (err: any) {
+    console.error(`GET /enquiries/${id} error:`, err);
+    res.status(500).json({ error: 'Server error', details: err?.message || String(err) });
   }
 });
 
@@ -81,9 +82,9 @@ router.put('/:id/status', requireAuth, async (req, res) => {
   try {
     await pool.execute('UPDATE enquiries SET status = ? WHERE id = ?', [status, id]);
     res.json({ success: true });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+  } catch (err: any) {
+    console.error(`PUT /enquiries/${id}/status error:`, err);
+    res.status(500).json({ error: 'Server error', details: err?.message || String(err) });
   }
 });
 
@@ -92,9 +93,9 @@ router.delete('/:id', requireAuth, async (req, res) => {
   try {
     await pool.execute('DELETE FROM enquiries WHERE id = ?', [id]);
     res.json({ success: true });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+  } catch (err: any) {
+    console.error(`DELETE /enquiries/${id} error:`, err);
+    res.status(500).json({ error: 'Server error', details: err?.message || String(err) });
   }
 });
 

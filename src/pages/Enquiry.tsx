@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { CheckCircle2, Loader2, Globe, FileCheck, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -139,7 +139,7 @@ export default function Enquiry() {
                     </div>
                     <div className="space-y-2">
                        <label className="text-[10px] uppercase font-bold tracking-widest text-brand-green-forest/40 ml-1">Product Interest *</label>
-                       <Select required onValueChange={(val: string) => setFormData({...formData, productInterest: val})}>
+                       <Select value={formData.productInterest} onValueChange={(val: string) => setFormData({...formData, productInterest: val})}>
                           <SelectTrigger className="h-12 border-brand-green-forest/10 focus:border-brand-green-forest bg-brand-off-white/50 rounded-none">
                             <SelectValue placeholder="Select Category" />
                           </SelectTrigger>
