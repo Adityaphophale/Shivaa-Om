@@ -35,7 +35,7 @@ export default function Footer() {
           <ul className="space-y-4">
             {['Home', 'About Us', 'Products', 'Trade Activities', 'Blog', 'Contact'].map(link => (
               <li key={link}>
-                <Link to={link === 'Home' ? '/' : `/${link.toLowerCase().replace(' ', '-')}`} className="text-sm text-brand-off-white/60 hover:text-brand-gold transition-colors flex items-center gap-2 group">
+                <Link to={link === 'Home' ? '/' : `/${link.toLowerCase().replace('us', '').replace(' ', '')}`} className="text-sm text-brand-off-white/60 hover:text-brand-gold transition-colors flex items-center gap-2 group">
                   <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
                   {link}
                 </Link>

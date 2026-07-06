@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+﻿﻿import { useState } from "react";
 import { motion } from "motion/react";
 import {
   ArrowRight,
@@ -11,45 +11,17 @@ import { Button } from "@/components/ui/button";
 import { POSTS } from "@/lib/content";
 
 export default function Blog() {
-  const [blogs, setBlogs] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        const res = await fetch("/api/blogs?publishedOnly=true");
-        if (!res.ok) throw new Error("Failed to fetch");
-        const data = await res.json();
-        if (mounted) {
-          if (data && data.length > 0) {
-            setBlogs(data);
-          } else {
-            // Fallback to static content if DB is empty
-            setBlogs(POSTS.map(b => ({
-              ...b,
-              content: b.excerpt,
-              publish_date: b.date,
-              slug: b.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
-            })));
-          }
-          setLoading(false);
-        }
-      } catch (err) {
-        console.error(err);
-        if (mounted) {
-          setBlogs(POSTS.map(b => ({
-            ...b,
-            content: b.excerpt,
-            publish_date: b.date,
-            slug: b.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
-          })));
-          setLoading(false);
-        }
-      }
-    })();
-    return () => { mounted = false; };
-  }, []);
+  const [blogs] = useState<any[]>(
+    POSTS.map((b) => ({
+      ...b,
+      content: b.excerpt,
+      publish_date: b.date,
+      slug: b.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)+/g, ""),
+    }))
+  );
 
   const featuredBlog = blogs.length > 0 ? blogs[0] : null;
   const regularBlogs = blogs.length > 1 ? blogs.slice(1) : [];
@@ -64,9 +36,7 @@ export default function Blog() {
           <span>Merchant Ledger</span>
         </div>
 
-        {loading ? (
-          <div className="text-center py-24 font-display uppercase tracking-widest text-brand-green-forest/40">Loading Publications...</div>
-        ) : blogs.length === 0 ? (
+        {blogs.length === 0 ? (
           <div className="text-center py-24 font-display uppercase tracking-widest text-brand-green-forest/40">No publications available at the moment.</div>
         ) : (
           <>
