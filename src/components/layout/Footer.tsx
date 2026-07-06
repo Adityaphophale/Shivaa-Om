@@ -43,7 +43,7 @@ export default function Footer() {
           <ul className="space-y-4">
             {QUICK_LINKS.map(link => (
               <li key={link.name}>
-                <Link to={link.path} className="text-sm text-brand-off-white/60 hover:text-brand-gold transition-colors duration-300 flex items-center justify-center md:justify-start gap-2 group">
+                <Link to={link.path} className="text-sm text-brand-off-white/60 hover:text-brand-gold transition-colors duration-300 flex items-center justify-center md:justify-start gap-2 group py-1">
                   <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
                   {link.name}
                 </Link>
@@ -58,7 +58,7 @@ export default function Footer() {
           <ul className="space-y-4">
             {CORE_TRADE_LINKS.map(link => (
               <li key={link.name}>
-                <Link to={link.path} className="text-sm text-brand-off-white/60 hover:text-brand-gold transition-colors duration-300 block">
+                <Link to={link.path} className="text-sm text-brand-off-white/60 hover:text-brand-gold transition-colors duration-300 block py-1">
                   {link.name}
                 </Link>
               </li>

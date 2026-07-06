@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Pages
 import Home from "./pages/Home";
@@ -18,6 +19,7 @@ import BlogPost from "./pages/BlogPost";
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         {/* Public Routes with Navbar and Footer */}
         <Route path="/*" element={
