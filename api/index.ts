@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import authRoutes from '../server/routes/auth';
-import enquiryRoutes from '../server/routes/enquiries';
 import productRoutes from '../server/routes/products';
 import blogRoutes from '../server/routes/blogs';
 import dashboardRoutes from '../server/routes/dashboard';
@@ -16,7 +15,6 @@ app.use(cookieParser());
 
 // API routes
 app.use('/api/auth', authRoutes);
-app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/dashboard', dashboardRoutes);

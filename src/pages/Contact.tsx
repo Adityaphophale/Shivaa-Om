@@ -1,14 +1,12 @@
 import { useState } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, MessageSquare, Clock, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { toast } from "sonner";
 
 export default function Contact() {
-  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -19,45 +17,101 @@ export default function Contact() {
     productInterest: "",
     message: ""
   });
+  const [errors, setErrors] = useState<Partial<typeof formData>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const validate = (field?: keyof typeof formData) => {
+    const newErrors: Partial<typeof formData> = { ...errors };
+    const data = { ...formData };
+
+    // Trim all string values
+    for (const key in data) {
+      if (typeof data[key as keyof typeof data] === 'string') {
+        data[key as keyof typeof data] = data[key as keyof typeof data].trim();
+      }
+    }
+
+    const validateField = (key: keyof typeof formData) => {
+      switch (key) {
+        case 'name':
+          if (!data.name) newErrors.name = "Please enter a valid full name.";
+          else if (data.name.length < 2 || data.name.length > 50) newErrors.name = "Please enter a valid full name.";
+          else if (!/^[a-zA-Z\s]+$/.test(data.name)) newErrors.name = "Please enter a valid full name.";
+          else delete newErrors.name;
+          break;
+        case 'company':
+          if (!data.company) newErrors.company = "Please enter your organization name.";
+          else if (data.company.length < 2 || data.company.length > 100) newErrors.company = "Please enter your organization name.";
+          else if (!/^[a-zA-Z0-9\s&.,-]+$/.test(data.company)) newErrors.company = "Please enter your organization name.";
+          else delete newErrors.company;
+          break;
+        case 'email':
+          if (!data.email) newErrors.email = "Please enter a valid email address.";
+          else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) newErrors.email = "Please enter a valid email address.";
+          else delete newErrors.email;
+          break;
+        case 'phone':
+          if (data.phone && !/^\+?[0-9]{7,15}$/.test(data.phone)) newErrors.phone = "Please enter a valid phone number.";
+          else delete newErrors.phone;
+          break;
+        case 'country':
+          if (!data.country) newErrors.country = "Please select your country.";
+          else delete newErrors.country;
+          break;
+        case 'productInterest':
+          if (!data.productInterest) newErrors.productInterest = "Please select a product category.";
+          else delete newErrors.productInterest;
+          break;
+        case 'message':
+          if (!data.message) newErrors.message = "Please provide your requirements (minimum 20 characters).";
+          else if (data.message.length < 20 || data.message.length > 1000) newErrors.message = "Please provide your requirements (minimum 20 characters).";
+          else delete newErrors.message;
+          break;
+        default:
+          break;
+      }
+    };
+
+    if (field) {
+      validateField(field);
+    } else {
+      (Object.keys(data) as Array<keyof typeof formData>).forEach(key => validateField(key));
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    
-    const API_URL = import.meta.env.VITE_API_URL || '';
-    try {
-         const res = await fetch(`${API_URL}/api/enquiries`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-               full_name: formData.name,
-               organization: formData.company,
-               email: formData.email,
-               phone: formData.phone,
-               country: formData.country,
-               product_interest: formData.productInterest,
-               message: formData.message,
-               source_page: window.location.href,
-            })
-         });
-         
-         if (!res.ok) {
-            let errorMsg = 'Failed to submit';
-            try {
-               const errData = await res.json();
-               errorMsg = errData.details || errData.error || errData.errors?.[0]?.msg || `HTTP ${res.status} ${res.statusText}`;
-            } catch (e) {
-               errorMsg = `Server returned ${res.status} ${res.statusText} (Not JSON)`;
-            }
-            throw new Error(errorMsg);
-         }
-         
-         setSuccess(true);
-         toast.success("Message sent successfully. Our team will contact you soon.");
-    } catch (error: any) {
-         toast.error(`Error: ${error.message}. Please try again or contact us via WhatsApp.`);
-    } finally {
-      setLoading(false);
+    if (isSubmitting) return;
+
+    if (validate()) {
+      setIsSubmitting(true);
+
+      // Sanitize and build WhatsApp message
+      const message = `Hello Shivaa Om Globe Trade Team,
+
+I would like to make an enquiry.
+
+Full Name: ${formData.name.trim()}
+Organization: ${formData.company.trim()}
+Email Address: ${formData.email.trim()}
+Phone Number: ${formData.phone.trim() || "N/A"}
+Country: ${formData.country.trim()}
+Product Interest: ${formData.productInterest.trim()}
+Requirements / Message:
+${formData.message.trim()}
+
+Please contact me regarding my enquiry.
+
+Thank you.`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/919152573356?text=${encodedMessage}`;
+      
+      window.open(whatsappUrl, "_blank");
+      setSuccess(true);
     }
   };
 
@@ -157,7 +211,7 @@ export default function Contact() {
                  </div>
                  <h2 className="text-3xl font-display font-medium text-white mb-6">Message Sent</h2>
                  <p className="text-white/60 text-sm leading-relaxed mb-8">
-                   Thank you for reaching out to Shivaa Om Globe Trade. Your message has been received and a representative will contact you shortly.
+                   Thank you for reaching out to Shivaa Om Globe Trade. Your message has been sent via WhatsApp and a representative will contact you shortly.
                  </p>
                  <Button className="bg-brand-gold text-brand-green-deep hover:bg-white h-12 px-8 rounded-none uppercase text-xs font-bold tracking-widest transition-all" onClick={() => setSuccess(false)}>
                     Send Another Message
@@ -173,7 +227,8 @@ export default function Contact() {
                     Full Name *
                   </label>
 
-                  <Input required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                  <Input value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} onBlur={() => validate('name')} className={`bg-transparent text-white border-0 border-b rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10 ${errors.name ? 'border-red-500' : 'border-white/20'}`} />
+                  {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -181,7 +236,8 @@ export default function Contact() {
                     Organization *
                   </label>
 
-                  <Input required value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                  <Input value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} onBlur={() => validate('company')} className={`bg-transparent text-white border-0 border-b rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10 ${errors.company ? 'border-red-500' : 'border-white/20'}`} />
+                  {errors.company && <p className="text-red-500 text-xs mt-1">{errors.company}</p>}
                 </div>
               </div>
 
@@ -191,7 +247,8 @@ export default function Contact() {
                     Email Address *
                   </label>
 
-                  <Input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                  <Input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} onBlur={() => validate('email')} className={`bg-transparent text-white border-0 border-b rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10 ${errors.email ? 'border-red-500' : 'border-white/20'}`} />
+                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -199,7 +256,8 @@ export default function Contact() {
                     Phone Number
                   </label>
 
-                  <Input value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                  <Input value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} onBlur={() => validate('phone')} className={`bg-transparent text-white border-0 border-b rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10 ${errors.phone ? 'border-red-500' : 'border-white/20'}`} />
+                  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
                 </div>
               </div>
 
@@ -209,7 +267,8 @@ export default function Contact() {
                     Country *
                   </label>
 
-                  <Input required value={formData.country} onChange={e => setFormData({...formData, country: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10" />
+                  <Input value={formData.country} onChange={e => setFormData({...formData, country: e.target.value})} onBlur={() => validate('country')} className={`bg-transparent text-white border-0 border-b rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10 ${errors.country ? 'border-red-500' : 'border-white/20'}`} />
+                  {errors.country && <p className="text-red-500 text-xs mt-1">{errors.country}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -217,18 +276,29 @@ export default function Contact() {
                     Product Interest *
                   </label>
 
-                  <Select required onValueChange={(val: string) => setFormData({...formData, productInterest: val})}>
-                    <SelectTrigger className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10">
+                  <Select onValueChange={(val: string) => {
+                    setFormData({...formData, productInterest: val});
+                    if (val) {
+                      setErrors(prev => {
+                        const newErrors = {...prev};
+                        delete newErrors.productInterest;
+                        return newErrors;
+                      });
+                    }
+                  }}>
+                    <SelectTrigger onBlur={() => validate('productInterest')} className={`bg-transparent text-white border-0 border-b rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10 w-full ${errors.productInterest ? 'border-red-500' : 'border-white/20'}`}>
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
                     <SelectContent className="bg-white border-brand-green-forest/10 rounded-none">
                       <SelectItem value="Agro Commodities">Agro Commodities</SelectItem>
                       <SelectItem value="Electric Mobility">Electric Mobility</SelectItem>
+                      <SelectItem value="Industrial Products">Industrial Products</SelectItem>
                       <SelectItem value="Chemicals">Chemicals</SelectItem>
                       <SelectItem value="Polymers">Polymers</SelectItem>
                       <SelectItem value="Merchant Trading">Merchant Trading</SelectItem>
                     </SelectContent>
                   </Select>
+                  {errors.productInterest && <p className="text-red-500 text-xs mt-1">{errors.productInterest}</p>}
                 </div>
               </div>
 
@@ -237,11 +307,16 @@ export default function Contact() {
                   Message / Requirements *
                 </label>
 
-                <Textarea required value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="bg-transparent text-white border-0 border-b border-white/20 rounded-none focus:border-brand-gold focus:ring-0 px-0 min-h-[100px] resize-none" />
+                <Textarea value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} onBlur={() => validate('message')} className={`bg-transparent text-white border-0 border-b rounded-none focus:border-brand-gold focus:ring-0 px-0 min-h-[100px] resize-none ${errors.message ? 'border-red-500' : 'border-white/20'}`} />
+                {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
               </div>
 
-              <Button disabled={loading} type="submit" className="w-full h-16 bg-brand-gold text-brand-green-deep hover:bg-white rounded-none uppercase text-xs font-bold tracking-[0.2em] transition-all group">
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Initialize Inquiry <Send className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" /></>}
+              <Button type="submit" disabled={isSubmitting} className="w-full h-16 bg-brand-gold text-brand-green-deep hover:bg-white rounded-none uppercase text-xs font-bold tracking-[0.2em] transition-all group disabled:opacity-70">
+                {isSubmitting ? (
+                  <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Redirecting...</>
+                ) : (
+                  <>Initialize Inquiry <Send className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" /></>
+                )}
               </Button>
             </form>
             )}

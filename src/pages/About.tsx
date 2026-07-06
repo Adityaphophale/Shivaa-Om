@@ -33,7 +33,7 @@ export default function About() {
 
       {/* Vision & Mission */}
       <section className="bg-brand-green-deep text-white py-24 mb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-4 sm:px-6 grid md:grid-cols-2 gap-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-24">
           <div>
             <div className="flex items-center gap-4 mb-8">
               <Eye className="w-8 h-8 text-brand-gold" />
@@ -78,11 +78,11 @@ export default function About() {
               { icon: ShieldCheck, title: "Quality Assured", desc: "Every product is verified and compliant before shipment, ensuring you get exactly what was promised." },
               { icon: Zap, title: "Efficient Logistics", desc: "Timely delivery is at our core. We optimize routes and handle documentation for seamless transitions." },
               { icon: Handshake, title: "Trust & Ethics", desc: "Built on transparency, our relationships with verified suppliers and buyers are designed for the long term." },
-              { icon: Globe2, title: "Global Network", desc: "Strong presence in India, Africa, and China gives us an edge in sourcing and distribution." },
+              { icon: Globe2, title: "Global Network", desc: "A trusted worldwide network enabling seamless sourcing, distribution, and trade across international markets." },
               { icon: Target, title: "Market Expertise", desc: "Deep understanding of agro commodities, industrial chemicals, and electric mobility solutions enables us to navigate markets effectively." },
               { icon: Globe2, title: "Customized Solutions", desc: "Flexible trade solutions tailored to meet specific industrial requirements and manufacturing needs." }
             ].map((feature, i) => (
-              <div key={i} className="premium-card min-h-[300px]">
+              <div key={i} className="premium-card min-h-75">
                  <feature.icon className="w-10 h-10 text-brand-gold mb-8" />
                 {feature.title === "Trust & Ethics" ? (
                   <h3 className="text-xl mb-4 font-display font-bold text-brand-green-forest uppercase">

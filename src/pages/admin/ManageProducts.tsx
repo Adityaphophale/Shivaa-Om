@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Package, Plus, Edit, Trash2, X } from "lucide-react";
+import { Package, Plus, Edit, Trash2, X, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
@@ -12,7 +12,6 @@ export default function ManageProducts() {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<any>(null);
-
   // Form state
   const [formData, setFormData] = useState({
     name: "",
@@ -23,6 +22,8 @@ export default function ManageProducts() {
     status: "Active",
     image: ""
   });
+  const [errors, setErrors] = useState<Partial<typeof formData>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const fetchProducts = async () => {
     try {
@@ -81,8 +82,40 @@ export default function ManageProducts() {
     setIsModalOpen(true);
   };
 
+  const validate = () => {
+    const newErrors: Partial<typeof formData> = {};
+    if (!formData.name.trim()) newErrors.name = "Product name is required.";
+    else if (formData.name.trim().length < 3) newErrors.name = "Name must be at least 3 characters.";
+
+    if (!formData.category) newErrors.category = "Category is required.";
+    if (!formData.origin.trim()) newErrors.origin = "Origin is required.";
+    if (!formData.route.trim()) newErrors.route = "Route is required.";
+
+    if (!formData.desc.trim()) newErrors.desc = "Description is required.";
+    else if (formData.desc.trim().length < 10) newErrors.desc = "Description must be at least 10 characters.";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name as keyof typeof errors]) {
+        setErrors(prev => {
+            const newErrors = {...prev};
+            delete newErrors[name as keyof typeof errors];
+            return newErrors;
+        });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validate()) {
+      return;
+    }
+    setIsSubmitting(true);
     try {
       const API_URL = import.meta.env.VITE_API_URL || '';
       const url = currentProduct ? `${API_URL}/api/products/${currentProduct.id}` : `${API_URL}/api/products`;
@@ -112,6 +145,8 @@ export default function ManageProducts() {
     } catch (err) {
       console.error(err);
       toast.error("Failed to save product.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -152,47 +187,52 @@ export default function ManageProducts() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Product Name</label>
-                    <Input required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="rounded-none" />
+                    <Input name="name" value={formData.name} onChange={handleFormChange} className={`rounded-none ${errors.name ? 'border-red-500' : ''}`} />
+                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Category</label>
-                    <select required value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} className="flex h-10 w-full rounded-none border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                    <select name="category" value={formData.category} onChange={handleFormChange} className={`flex h-10 w-full rounded-none border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${errors.category ? 'border-red-500' : ''}`}>
                       <option value="">Select Category...</option>
                       <option value="Agro Commodities">Agro Commodities</option>
                       <option value="Electric Mobility">Electric Mobility</option>
                       <option value="Industrial Products">Industrial Products</option>
                       <option value="Chemicals">Chemicals</option>
                     </select>
+                    {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category}</p>}
                   </div>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Origin</label>
-                    <Input required value={formData.origin} onChange={e => setFormData({...formData, origin: e.target.value})} className="rounded-none" />
+                    <Input name="origin" value={formData.origin} onChange={handleFormChange} className={`rounded-none ${errors.origin ? 'border-red-500' : ''}`} />
+                    {errors.origin && <p className="text-red-500 text-xs mt-1">{errors.origin}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Route</label>
-                    <Input required value={formData.route} onChange={e => setFormData({...formData, route: e.target.value})} className="rounded-none" placeholder="e.g. India → Africa" />
+                    <Input name="route" value={formData.route} onChange={handleFormChange} className={`rounded-none ${errors.route ? 'border-red-500' : ''}`} placeholder="e.g. India → Africa" />
+                    {errors.route && <p className="text-red-500 text-xs mt-1">{errors.route}</p>}
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Description</label>
-                  <Textarea required value={formData.desc} onChange={e => setFormData({...formData, desc: e.target.value})} className="rounded-none min-h-[100px]" />
+                  <Textarea name="desc" value={formData.desc} onChange={handleFormChange} className={`rounded-none min-h-[100px] ${errors.desc ? 'border-red-500' : ''}`} />
+                  {errors.desc && <p className="text-red-500 text-xs mt-1">{errors.desc}</p>}
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Status</label>
-                    <select value={formData.status} onChange={e => setFormData({...formData, status: e.target.value})} className="flex h-10 w-full rounded-none border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                    <select name="status" value={formData.status} onChange={handleFormChange} className="flex h-10 w-full rounded-none border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                       <option value="Active">Active</option>
                       <option value="Inactive">Inactive</option>
                     </select>
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Product Image</label>
-                    <Input type="file" accept="image/*" onChange={handleImageUpload} className="rounded-none" />
+                    <Input type="file" name="image" accept="image/*" onChange={handleImageUpload} className="rounded-none" />
                     {formData.image && (
                       <div className="mt-2 relative inline-block">
                         <img src={formData.image} alt="Preview" className="h-20 object-contain border p-1" />
@@ -204,7 +244,13 @@ export default function ManageProducts() {
 
                 <div className="flex justify-end gap-4 pt-4 border-t">
                   <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)} className="rounded-none uppercase tracking-widest text-xs">Cancel</Button>
-                  <Button type="submit" className="rounded-none uppercase tracking-widest text-xs bg-brand-green-forest">{currentProduct ? "Update Product" : "Save Product"}</Button>
+                  <Button type="submit" disabled={isSubmitting} className="rounded-none uppercase tracking-widest text-xs bg-brand-green-forest disabled:opacity-50">
+                    {isSubmitting ? (
+                      <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...</>
+                    ) : (
+                      currentProduct ? "Update Product" : "Save Product"
+                    )}
+                  </Button>
                 </div>
               </form>
             </DialogContent>

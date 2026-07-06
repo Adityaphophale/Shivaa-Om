@@ -15,7 +15,7 @@ export default function Footer() {
               </span>
            </div>
            <p className="text-sm text-brand-off-white/60 leading-relaxed mb-8">
-             Connecting India to the world through trustworthy global trade solutions across Agro, EV, and Chemical sectors.
+             Connecting India to the world through trusted global trade solutions across agro commodities, electric mobility, chemicals, and more.
            </p>
            <div className="flex gap-4">
              <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-gold hover:border-brand-gold transition-all">
@@ -48,8 +48,8 @@ export default function Footer() {
           <h4 className="font-display text-lg mb-8 uppercase tracking-widest text-brand-gold">Core Trade</h4>
           <ul className="space-y-4">
             {[
-              { name: 'Export: India → Africa', path: '/export' },
-              { name: 'Import: China → India', path: '/import' },
+              { name: 'Export - India - Global Markets ', path: '/export' },
+              { name: 'Import  Global Markets - India', path: '/import' },
               { name: 'Agro Commodities', path: '/products' },
               { name: 'Electric Mobility', path: '/products' },
               { name: 'Industrial Chemicals', path: '/products' }
@@ -98,13 +98,13 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-        <p className="text-xs text-brand-off-white/40">
-          © {new Date().getFullYear()} Shivaa Om Globe Trade Private Limited. All rights reserved. Registered IEC Company.
-        </p>
-        <div className="flex gap-8 text-xs text-brand-off-white/40">
-          <Link to="/privacy" className="hover:text-brand-gold transition-colors">Privacy Policy</Link>
-          <Link to="/terms" className="hover:text-brand-gold transition-colors">Terms of Service</Link>
-          <Link to="/sitemap" className="hover:text-brand-gold transition-colors">Sitemap</Link>
+        <div className="flex flex-col items-center md:items-start gap-3">
+          <p className="text-xs text-brand-off-white/40">
+            © {new Date().getFullYear()} Shivaa Om Globe Trade Private Limited. All rights reserved. Registered IEC Company.
+          </p>
+          <p className="text-xs text-brand-off-white/40">
+            Design & Developed by <a href="https://www.innovexxa.com/" target="_blank" rel="noopener noreferrer" className="text-brand-off-white/40 hover:text-brand-gold hover:underline transition-colors duration-250">Innovexxa</a>
+          </p>
         </div>
       </div>
     </footer>

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const STATS = [
-  { label: "Active Markets", val: "India · Africa · China" },
+  { label: "Active Markets", val: "Markets Across the Globe" },
   { label: "Business Type", val: "EXIM · Pvt. Ltd." },
   { label: "Response Time", val: "Within 24 Hours" },
   { label: "Global Partners", val: "50+ Verified" }
@@ -80,7 +80,7 @@ export default function Home() {
                 <div>
                    <span className="text-brand-gold text-[10px] font-bold uppercase tracking-widest block mb-4">Core Connectivity</span>
                    <h2 className="text-3xl sm:text-4xl text-white font-medium leading-tight uppercase font-display tracking-tight">
-                     Linking Asia, <br /> Africa & India
+                     Connecting Global Markets
                    </h2>
                 </div>
              </div>
@@ -136,8 +136,8 @@ export default function Home() {
         
         <div className="grid lg:grid-cols-3 gap-0 border border-brand-green-forest/10">
           {[
-            { num: "01", title: "Export Logistics", desc: "India to Africa specialisation. End-to-end management of agro commodities, industrial polymers, and electric mobility solutions.", tag: "INDIA → AFRICA", icon: Ship },
-            { num: "02", title: "Import Sourcing", desc: "China to India bridge. Sourcing food-grade chemicals and industrial raw materials with rigorous quality audits.", tag: "CHINA → INDIA", icon: FlaskConical },
+            { num: "01", title: "Export Logistics", desc: "Global Market Expertise, End-to-end management of Agro commodities, industrial polymers, and electric mobility solutions.", tag: "India to Global Markets", icon: Ship },
+            { num: "02", title: "Global Sourcing Expertise", desc: "Sourcing food-grade chemicals and industrial raw materials with rigorous quality audits.", tag: "Global Markets to India", icon: FlaskConical },
             { num: "03", title: "Trade Advisory", desc: "Expert guidance on international trade compliance, documentation, and market-entry strategies for emerging economies.", tag: "GLOBAL REACH", icon: TrendingUp }
           ].map((service, i) => (
             <motion.div 
@@ -216,7 +216,7 @@ export default function Home() {
                <span className="text-brand-green-forest/40 text-[10px] font-bold uppercase tracking-[0.4em] block mb-8">Our Presence</span>
                   <h2 className="text-3xl sm:text-4xl lg:text-6xl font-medium mb-8 leading-tight">JNPT - Navi Mumbai  <br /><span className="text-brand-gold">Global Gateway</span></h2>
                <p className="text-brand-green-deep/60 text-sm leading-relaxed mb-12 max-w-md">
-                 Strategically located in Navi Mumbai, we leverage India's massive maritime infrastructure to connect with partners across East Africa, Central Africa and China.
+                 Strategically located in Navi Mumbai, we leverage India's extensive maritime infrastructure to connect with partners across the globe.
                </p>
                <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4">
 
@@ -242,16 +242,30 @@ export default function Home() {
 
 </div>
             </div>
-            <div className="bg-brand-green-forest relative min-h-[400px]">
+            <div className="bg-brand-green-forest relative min-h-[600px]">
                <Map className="absolute inset-0 w-full h-full text-brand-gold/10 p-12 animate-pulse" />
-               <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-12">
-                  <h3 className="text-3xl font-display font-medium uppercase tracking-[0.2em] mb-4">India → Africa</h3>
-                  <div className="flex items-center gap-6 text-brand-gold">
-                     <div className="w-12 h-0.5 bg-brand-gold/30"></div>
-                     <Ship className="w-10 h-10" />
-                     <div className="w-12 h-0.5 bg-brand-gold/30"></div>
+               <div className="absolute inset-0 flex flex-col">
+                  {/* Top - India to Global */}
+                  <div className="flex-1 flex flex-col items-center justify-center text-white text-center p-8 md:p-12 border-b border-white/10">
+                     <h3 className="text-2xl md:text-3xl font-display font-medium uppercase tracking-[0.2em] mb-4">INDIA → GLOBAL MARKETS</h3>
+                     <div className="flex items-center gap-6 text-brand-gold">
+                        <div className="w-8 h-0.5 bg-brand-gold/30"></div>
+                        <Ship className="w-8 h-8" />
+                        <div className="w-8 h-0.5 bg-brand-gold/30"></div>
+                     </div>
+                     <p className="mt-8 text-[10px] font-bold uppercase tracking-[0.4em] text-white/60">Verified Trade Routes</p>
                   </div>
-                  <p className="mt-8 text-[10px] font-bold uppercase tracking-[0.5em] text-white/40">Verified Routes Only</p>
+                  
+                  {/* Bottom - Global to India */}
+                  <div className="flex-1 flex flex-col items-center justify-center text-white text-center p-8 md:p-12">
+                     <h3 className="text-2xl md:text-3xl font-display font-medium uppercase tracking-[0.2em] mb-4">GLOBAL → INDIA</h3>
+                     <div className="flex items-center gap-6 text-brand-gold">
+                        <div className="w-8 h-0.5 bg-brand-gold/30"></div>
+                        <Ship className="w-8 h-8" />
+                        <div className="w-8 h-0.5 bg-brand-gold/30"></div>
+                     </div>
+                     <p className="mt-8 text-[10px] font-bold uppercase tracking-[0.4em] text-white/60">Strategic Sourcing & Procurement</p>
+                  </div>
                </div>
             </div>
          </div>

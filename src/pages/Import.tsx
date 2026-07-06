@@ -13,7 +13,7 @@ const WORKFLOW = [
     id: "01",
     title: "Strategic Sourcing",
     desc:
-      "Collaborating with verified tier-1 manufacturers in China to secure high-purity industrial chemicals.",
+      "Collaborating with verified tier-1 manufacturers in global markets to secure high-purity industrial chemicals.",
   },
   {
     id: "02",
@@ -25,7 +25,7 @@ const WORKFLOW = [
     id: "03",
     title: "Logistics Optimization",
     desc:
-      "Streamlined shipping from major Chinese ports to Indian hubs with real-time tracking.",
+      "Streamlined shipping from major global ports to Indian hubs with real-time tracking.",
   },
   {
     id: "04",
@@ -44,7 +44,7 @@ export default function Import() {
 
         <div className="magazine-header">
           <span>Core Trade Mode</span>
-          <span>China → India</span>
+          <span>Global Market - India</span>
         </div>
 
         <div className="editorial-split text-brand-green-deep">
@@ -61,9 +61,7 @@ export default function Import() {
             </h1>
 
             <p className="text-xl leading-relaxed text-brand-green-deep/80 mb-12">
-              We import quality industrial raw materials and
-              food-grade chemicals to support domestic
-              manufacturing and industrial requirements in India.
+              We import high-quality industrial raw materials and food-grade chemicals to support domestic manufacturing and industrial operations. Our reliable global supply network also enables us to serve international markets, ensuring consistent quality, timely delivery, and dependable supply across multiple industries.
             </p>
 
             {/* PRODUCT LIST */}
@@ -100,7 +98,7 @@ export default function Import() {
               </h2>
 
               <p className="text-sm text-brand-off-white/60 leading-relaxed">
-                Our team in China ensures that every batch
+                Our global team ensures that every batch
                 matches requested specifications. We navigate
                 the complexities of international sourcing so
                 you don't have to.

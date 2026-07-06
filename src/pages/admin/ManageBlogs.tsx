@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { FileText, Plus, Edit, Trash2, X } from "lucide-react";
+import { FileText, Plus, Edit, Trash2, X, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
@@ -12,7 +12,6 @@ export default function ManageBlogs() {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentBlog, setCurrentBlog] = useState<any>(null);
-
   // Form state
   const [formData, setFormData] = useState({
     title: "",
@@ -23,6 +22,8 @@ export default function ManageBlogs() {
     status: "Draft",
     featured_image: ""
   });
+  const [errors, setErrors] = useState<Partial<typeof formData>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const fetchBlogs = async () => {
     try {
@@ -81,8 +82,38 @@ export default function ManageBlogs() {
     setIsModalOpen(true);
   };
 
+  const validate = () => {
+    const newErrors: Partial<typeof formData> = {};
+    if (!formData.title.trim()) newErrors.title = "Title is required.";
+    else if (formData.title.trim().length < 5) newErrors.title = "Title must be at least 5 characters.";
+
+    if (!formData.category) newErrors.category = "Category is required.";
+    if (!formData.author.trim()) newErrors.author = "Author is required.";
+    if (!formData.publish_date) newErrors.publish_date = "Publish date is required.";
+
+    if (!formData.content.trim()) newErrors.content = "Content is required.";
+    else if (formData.content.trim().length < 20) newErrors.content = "Content must be at least 20 characters.";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name as keyof typeof errors]) {
+        setErrors(prev => {
+            const newErrors = {...prev};
+            delete newErrors[name as keyof typeof errors];
+            return newErrors;
+        });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validate()) return;
+    setIsSubmitting(true);
     try {
       const API_URL = import.meta.env.VITE_API_URL || '';
       const url = currentBlog ? `${API_URL}/api/blogs/${currentBlog.id}` : `${API_URL}/api/blogs`;
@@ -102,6 +133,8 @@ export default function ManageBlogs() {
     } catch (err) {
       console.error(err);
       toast.error("Failed to save blog.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -141,13 +174,14 @@ export default function ManageBlogs() {
               <form onSubmit={handleSubmit} className="space-y-6 pt-4">
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Blog Title</label>
-                  <Input required value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="rounded-none" />
+                  <Input name="title" value={formData.title} onChange={handleFormChange} className={`rounded-none ${errors.title ? 'border-red-500' : ''}`} />
+                  {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title}</p>}
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Category</label>
-                    <select required value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} className="flex h-10 w-full rounded-none border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                    <select name="category" value={formData.category} onChange={handleFormChange} className={`flex h-10 w-full rounded-none border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${errors.category ? 'border-red-500' : ''}`}>
                       <option value="">Select Category...</option>
                       <option value="Corporate Profile">Corporate Profile</option>
                       <option value="Electric Mobility">Electric Mobility</option>
@@ -155,21 +189,24 @@ export default function ManageBlogs() {
                       <option value="Logistics">Logistics</option>
                       <option value="Market Trends">Market Trends</option>
                     </select>
+                    {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Author</label>
-                    <Input required value={formData.author} onChange={e => setFormData({...formData, author: e.target.value})} className="rounded-none" />
+                    <Input name="author" value={formData.author} onChange={handleFormChange} className={`rounded-none ${errors.author ? 'border-red-500' : ''}`} />
+                    {errors.author && <p className="text-red-500 text-xs mt-1">{errors.author}</p>}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Publish Date</label>
-                    <Input type="date" required value={formData.publish_date} onChange={e => setFormData({...formData, publish_date: e.target.value})} className="rounded-none" />
+                    <Input type="date" name="publish_date" value={formData.publish_date} onChange={handleFormChange} className={`rounded-none ${errors.publish_date ? 'border-red-500' : ''}`} />
+                    {errors.publish_date && <p className="text-red-500 text-xs mt-1">{errors.publish_date}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Status</label>
-                    <select value={formData.status} onChange={e => setFormData({...formData, status: e.target.value})} className="flex h-10 w-full rounded-none border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                    <select name="status" value={formData.status} onChange={handleFormChange} className="flex h-10 w-full rounded-none border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                       <option value="Draft">Draft</option>
                       <option value="Published">Published</option>
                     </select>
@@ -178,12 +215,13 @@ export default function ManageBlogs() {
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Content</label>
-                  <Textarea required value={formData.content} onChange={e => setFormData({...formData, content: e.target.value})} className="rounded-none min-h-[150px]" />
+                  <Textarea name="content" value={formData.content} onChange={handleFormChange} className={`rounded-none min-h-[150px] ${errors.content ? 'border-red-500' : ''}`} />
+                  {errors.content && <p className="text-red-500 text-xs mt-1">{errors.content}</p>}
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Featured Image</label>
-                  <Input type="file" accept="image/*" onChange={handleImageUpload} className="rounded-none" />
+                  <Input type="file" name="featured_image" accept="image/*" onChange={handleImageUpload} className="rounded-none" />
                   {formData.featured_image && (
                     <div className="mt-2 relative inline-block">
                       <img src={formData.featured_image} alt="Preview" className="h-20 object-contain border p-1" />
@@ -194,7 +232,13 @@ export default function ManageBlogs() {
 
                 <div className="flex justify-end gap-4 pt-4 border-t">
                   <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)} className="rounded-none uppercase tracking-widest text-xs">Cancel</Button>
-                  <Button type="submit" className="rounded-none uppercase tracking-widest text-xs bg-brand-green-forest">{currentBlog ? "Update Publication" : "Save Publication"}</Button>
+                  <Button type="submit" disabled={isSubmitting} className="rounded-none uppercase tracking-widest text-xs bg-brand-green-forest disabled:opacity-50">
+                    {isSubmitting ? (
+                      <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...</>
+                    ) : (
+                      currentBlog ? "Update Publication" : "Save Publication"
+                    )}
+                  </Button>
                 </div>
               </form>
             </DialogContent>

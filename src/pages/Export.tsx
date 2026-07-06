@@ -11,10 +11,10 @@ export default function Export() {
         <div className="editorial-split text-brand-green-deep">
           <div className="py-12 lg:pr-24">
             <h1 className="text-4xl sm:text-5xl lg:text-8xl font-medium leading-[0.9] mb-12">
-              Empowering <span className="text-brand-green-forest">Africa</span> With Indian Quality
+              Empowering <span className="text-brand-green-forest">Global markets</span> With Indian Quality
             </h1>
             <p className="text-xl leading-relaxed text-brand-green-deep/80 mb-12">
-              Shivaa Om Globe Trade specializes in exporting high-demand agricultural and industrial products from India to dynamic African markets.
+              Shivaa Om Globe Trade specializes in exporting high-demand agricultural and industrial products from India to dynamic global markets.
             </p>
             <div className="grid grid-cols-2 gap-4">
               {["Sugar S30 / Brown", "Extra Neutral Alcohol", "Molasses", "E-Rickshaws", "E-Bikes", "Polymers"].map(product => (
@@ -55,22 +55,26 @@ export default function Export() {
         </div>
       </section>
 
-      {/* Stats / Highlights */}
-      <section className="bg-brand-green-deep py-20 mb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-12">
-          {[
-            { val: "10+", label: "African Countries" },
-            { val: "5000+", label: "Tons Exported" },
-            { val: "100%", label: "Compliance Rate" },
-            { val: "24/7", label: "Trade Support" }
-          ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="text-4xl lg:text-6xl font-display font-medium text-brand-gold mb-2">{stat.val}</div>
-              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-off-white/40">{stat.label}</div>
-            </div>
-          ))}
+{/* Stats / Highlights */}
+<section className="bg-brand-green-deep py-20 mb-24">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="flex flex-col sm:flex-row justify-center items-center gap-16 lg:gap-32">
+      {[
+        { val: "100%", label: "Compliance Rate" },
+        { val: "24/7", label: "Trade Support" },
+      ].map((stat, i) => (
+        <div key={i} className="text-center">
+          <div className="text-4xl lg:text-6xl font-display font-medium text-brand-gold mb-2">
+            {stat.val}
+          </div>
+          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-off-white/40">
+            {stat.label}
+          </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Logistics Excellence */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-24">
@@ -87,7 +91,7 @@ export default function Export() {
             <div className="space-y-12">
               {[
                 { icon: ShieldCheck, title: "Pre-Shipment Inspection", desc: "Rigorous quality checks at source before cargo is port-bound." },
-                { icon: Truck, title: "Multimodal Transport", desc: "Coordinated rail and road logistics to major Indian ports like JNPT and Kandla." },
+                { icon: Truck, title: "Multimodal Transport", desc: "Coordinated rail and road logistics to major Indian Ports" },
                 { icon: zap, title: "Swift Documentation", desc: "Ensuring all export permits, LC compliance, and shipping docs are handled with precision." }
               ].map((item, i) => (
                 <div key={i} className="flex gap-6 group">
@@ -107,7 +111,7 @@ export default function Export() {
               <Globe className="w-12 h-12 text-brand-green-forest mb-8 opacity-20" />
               <h3 className="text-2xl font-display font-medium mb-4">Market Focus</h3>
               <p className="text-sm text-brand-green-deep/70 mb-8 leading-relaxed">
-                Focused on Tanzania, Kenya, the Democratic Republic of Congo, and Rwanda, we facilitate the supply of agro commodities, industrial chemicals, industrial raw materials, and sustainable mobility solutions across key East and Central African markets.
+                Focused on global markets, we facilitate the supply of agro commodities, industrial chemicals, industrial raw materials, and sustainable mobility solutions worldwide.
               </p>
               <div className="flex flex-wrap gap-2">
                 {["Tanzania", "Kenya", "The Democratic Republic of Congo", "Rwanda"].map(c => (

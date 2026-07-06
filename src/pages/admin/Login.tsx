@@ -12,8 +12,28 @@ export default function AdminLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({ email: '', password: '' });
+
+  const validate = () => {
+    const newErrors = { email: '', password: '' };
+    let isValid = true;
+    if (!email) {
+      newErrors.email = 'Email is required.';
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Email is invalid.';
+      isValid = false;
+    }
+    if (!password) {
+      newErrors.password = 'Password is required.';
+      isValid = false;
+    }
+    setErrors(newErrors);
+    return isValid;
+  };
 
   const handleLogin = async () => {
+    if (!validate()) return;
     setLoading(true);
     try {
       const res = await fetch('/api/auth/login', {
@@ -53,16 +73,18 @@ export default function AdminLogin() {
         <div className="space-y-3">
           <div className="text-left">
             <Label className="text-[10px] uppercase font-bold text-brand-green-forest/40">Email</Label>
-            <Input value={email} onChange={(e) => setEmail(e.target.value)} className="h-12 rounded-none" />
+            <Input value={email} onChange={(e) => setEmail(e.target.value)} className={`h-12 rounded-none ${errors.email ? 'border-red-500' : ''}`} />
+            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
           </div>
           <div className="text-left">
             <Label className="text-[10px] uppercase font-bold text-brand-green-forest/40">Password</Label>
-            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="h-12 rounded-none" />
+            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className={`h-12 rounded-none ${errors.password ? 'border-red-500' : ''}`} />
+            {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
           </div>
 
           <Button 
             onClick={handleLogin} 
-            disabled={loading}
+            disabled={loading || !email || !password}
             className="w-full h-14 bg-brand-green-forest text-white hover:bg-brand-green-deep rounded-none uppercase text-xs font-bold tracking-[0.2em] transition-all gap-3"
           >
             {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <><LogIn className="w-5 h-5" /> Sign In</>}

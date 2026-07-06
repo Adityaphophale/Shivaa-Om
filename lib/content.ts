@@ -9,15 +9,15 @@ export interface Product {
 }
 
 export const PRODUCTS: Product[] = [
-  { id: 1, name: "ZENITH ENA", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "High-grade Extra Neutral Alcohol (96%) suitable for beverage, pharmaceutical, cosmetic, personal care, perfumery, food processing, and industrial applications.", image: "/ENA.jpeg" },
-  { id: 2, name: "OM HARVEST White Refined Sugar (S30)", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "Grade S30 refined white sugar, high purity, essential for food and beverage manufacturing.", image: "/Rsugar.png" },
-  { id: 3, name: "OM HARVEST Brown Sugar", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "Rich molasses-infused brown sugar for baking and confectionery.", image: "/Bsugar.png" },
-  { id: 4, name: "ZENITH MOLASSES ", category: "Agro Commodities", origin: "India", route: "India → Africa", desc: "High-quality sugarcane molasses for distillation and industrial use.", image: "/Molasses.png" },
-  { id: 5, name: "SHIVAA E-Rickshaws", category: "Electric Mobility", origin: "India", route: "India → Africa", desc: "Certified high-efficiency electric three-wheelers for sustainable urban transport.", image: "/Erickshaw.png" },
-  { id: 6, name: "SHIVAA E-Bikes", category: "Electric Mobility", origin: "India", route: "India → Africa", desc: "Modern electric bicycles and scooters designed for the African landscape.", image: "/Ebike.png" },
+  { id: 1, name: "ZENITH ENA", category: "Agro Commodities", origin: "India", route: "India → Global Markets", desc: "High-grade Extra Neutral Alcohol (96%) suitable for beverage, pharmaceutical, cosmetic, personal care, perfumery, food processing, and industrial applications.", image: "/ENA.jpeg" },
+  { id: 2, name: "OM HARVEST White Refined Sugar (S30)", category: "Agro Commodities", origin: "India", route: "India → Global Markets", desc: "Grade S30 refined white sugar, high purity, essential for food and beverage manufacturing.", image: "/Rsugar.png" },
+  { id: 3, name: "OM HARVEST Brown Sugar", category: "Agro Commodities", origin: "India", route: "India → Global Markets", desc: "Rich molasses-infused brown sugar for baking and confectionery.", image: "/Bsugar.png" },
+  { id: 4, name: "ZENITH MOLASSES ", category: "Agro Commodities", origin: "India", route: "India → Global Markets", desc: "High-quality sugarcane molasses for distillation and industrial use.", image: "/Molasses.png" },
+  { id: 5, name: "SHIVAA E-Rickshaws", category: "Electric Mobility", origin: "India", route: "India → Global Markets", desc: "Certified high-efficiency electric three-wheelers for sustainable urban transport.", image: "/Erickshaw.png" },
+  { id: 6, name: "SHIVAA E-Bikes", category: "Electric Mobility", origin: "India", route: "India → Global Markets", desc: "Modern electric bicycles and scooters designed for the African landscape.", image: "/Ebike.png" },
   { id: 7, name: "Shivaa Polymers", category: "Industrial Products", origin: "Global", route: "Global Sourcing", desc: "Quality polymer resins for varied industrial and packaging applications.", image: "/Polymer.jpeg" },
-  { id: 8, name: "Globichem Citric Acid", category: "Chemicals", origin: "China", route: "China → India", desc: "Food-grade citric acid (Anhydrous/Monohydrate) for food processing.", image: "/Citric_acid.png" },
-  { id: 9, name: "Globichem Malic Acid", category: "Chemicals", origin: "China", route: "China → India", desc: "High-purity malic acid used in confectionery and beverage additives.", image: "/Malic_Acid.png" }
+  { id: 8, name: "Globichem Citric Acid", category: "Chemicals", origin: "China", route: "Global Market - India", desc: "Food-grade citric acid (Anhydrous/Monohydrate) for food processing.", image: "/Citric_acid.png" },
+  { id: 9, name: "Globichem Malic Acid", category: "Chemicals", origin: "China", route: "Global Market - India", desc: "High-purity malic acid used in confectionery and beverage additives.", image: "/Malic_Acid.png" }
 ];
 
 export type BlogPost = {
