@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 
@@ -12,8 +12,6 @@ import TradeActivities from "./pages/TradeActivities";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Enquiry from "./pages/Enquiry";
-import AdminLogin from "./pages/admin/Login";
-import AdminDashboard from "./pages/admin/Dashboard";
 import ProductDetail from "./pages/ProductDetail";
 import BlogPost from "./pages/BlogPost";
 
@@ -44,9 +42,6 @@ export default function App() {
           </div>
         } />
         
-        {/* Admin Routes without Navbar and Footer */}
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/*" element={<AdminDashboard />} />
       </Routes>
     </Router>
   );

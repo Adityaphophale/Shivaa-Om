@@ -63,7 +63,7 @@ export default function ProductDetail() {
               </div>
               <h1 className="text-4xl lg:text-5xl font-display font-medium text-brand-green-deep mb-6 leading-tight">{product.name}</h1>
               
-              <div className="grid grid-cols-2 gap-6 mb-8 bg-brand-beige/30 p-6 border border-brand-green-forest/5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 bg-brand-beige/30 p-6 border border-brand-green-forest/5">
                  <div>
                     <span className="block text-[9px] uppercase tracking-widest font-bold text-brand-green-deep/50 mb-1">Origin</span>
                     <span className="text-sm font-semibold text-brand-green-deep">{product.origin || "Global"}</span>

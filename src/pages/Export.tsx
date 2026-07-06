@@ -16,7 +16,7 @@ export default function Export() {
             <p className="text-xl leading-relaxed text-brand-green-deep/80 mb-12">
               Shivaa Om Globe Trade specializes in exporting high-demand agricultural and industrial products from India to dynamic global markets.
             </p>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {["Sugar S30 / Brown", "Extra Neutral Alcohol", "Molasses", "E-Rickshaws", "E-Bikes", "Polymers"].map(product => (
                 <div key={product} className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-brand-green-forest">
                   <div className="w-1 h-1 bg-brand-gold rounded-full" />

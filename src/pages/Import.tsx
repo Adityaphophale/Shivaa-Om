@@ -155,7 +155,7 @@ export default function Import() {
               </h3>
 
               {/* DESCRIPTION */}
-              <p className="relative z-10 text-sm leading-relaxed text-brand-green-deep/70 max-w-[260px]">
+              <p className="relative z-10 text-sm leading-relaxed text-brand-green-deep/70 max-w-full xl:max-w-[260px]">
                 {step.desc}
               </p>
 

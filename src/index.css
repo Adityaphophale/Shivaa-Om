@@ -17,6 +17,19 @@
 }
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    @apply box-border;
+    min-width: 0;
+  }
+
+  html,
+  body,
+  #root {
+    @apply min-w-0 w-full max-w-full overflow-x-hidden;
+  }
+
   body {
     @apply bg-brand-off-white text-brand-green-deep font-sans;
   }
@@ -27,16 +40,26 @@
 }
 
 .magazine-header {
-  @apply border-b-2 border-brand-green-forest pb-4 mb-8 flex items-end justify-between uppercase tracking-widest text-[10px] font-semibold text-brand-green-forest/60;
+  @apply border-b-2 border-brand-green-forest pb-4 mb-8 flex flex-col gap-2 sm:flex-row sm:items-end justify-between uppercase tracking-widest text-[10px] font-semibold text-brand-green-forest/60;
 }
 
 .editorial-split {
-  @apply grid lg:grid-cols-2 gap-0 min-h-150;
+  @apply grid lg:grid-cols-2 gap-0 min-h-150 overflow-hidden;
 }
 
 .premium-card {
   @apply bg-white border border-brand-green-forest/10 p-8 hover:bg-brand-beige transition-colors duration-500 relative overflow-hidden;
 }
+
+@layer base {
+  img,
+  picture,
+  video,
+  iframe {
+    @apply max-w-full h-auto;
+  }
+}
+
 
 .premium-card::after {
   content: '';

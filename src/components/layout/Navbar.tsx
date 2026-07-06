@@ -128,7 +128,9 @@ export default function Navbar() {
 
         {/* MOBILE MENU BUTTON */}
         <button
-          className="lg:hidden text-brand-green-forest p-2"
+          aria-label="Toggle mobile menu"
+          aria-expanded={isOpen}
+          className="lg:hidden text-brand-green-forest p-3 h-12 w-12 flex items-center justify-center"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (

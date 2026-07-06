@@ -59,8 +59,8 @@ export default function Home() {
             </div>
           </motion.div>
           
-          <div className="absolute bottom-0 right-0 opacity-[0.03] pointer-events-none translate-x-1/4 translate-y-1/4">
-             <Globe className="w-[360px] h-[360px] sm:w-[520px] sm:h-[520px] lg:w-[800px] lg:h-[800px]" />
+          <div className="absolute bottom-0 right-0 opacity-[0.03] pointer-events-none translate-x-1/4 translate-y-1/4 overflow-hidden max-w-full">
+             <Globe className="max-w-full w-[260px] h-[260px] sm:w-[360px] sm:h-[360px] md:w-[520px] md:h-[520px] lg:w-[800px] lg:h-[800px]" />
           </div>
         </div>
         
@@ -90,7 +90,7 @@ export default function Home() {
                 <span>The Ledger</span>
                 <span>Real-Time Stats</span>
              </div>
-             <div className="grid grid-cols-2 gap-x-6 sm:gap-x-12 gap-y-6">
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 sm:gap-x-12 gap-y-6">
                 {STATS.map((stat, i) => (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
