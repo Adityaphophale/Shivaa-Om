@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Calendar, MapPin, Tag, ArrowRight } from "lucide-react";
+import { Calendar, MapPin, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -63,11 +63,7 @@ export default function TradeActivities() {
                    </p>
                 </div>
 
-                <div className="lg:col-span-3 flex items-center justify-end">
-                   <div aria-hidden="true" className="w-24 h-24 bg-brand-beige border border-brand-green-forest/5 flex items-center justify-center grayscale group-hover:grayscale-0 group-hover:bg-brand-gold group-hover:border-brand-gold transition-all duration-500 pointer-events-none">
-                      <ArrowRight className="w-8 h-8 text-brand-green-forest group-hover:text-brand-green-deep" />
-                   </div>
-                </div>
+                {/* placeholder removed to clean up layout */}
              </motion.div>
            ))}
         </div>
