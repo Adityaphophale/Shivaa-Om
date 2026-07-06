@@ -107,17 +107,14 @@ export default function Export() {
             </div>
           </div>
           <div className="grid grid-cols-1 gap-8">
-            <div className="premium-card bg-brand-beige border-none">
-              <Globe className="w-12 h-12 text-brand-green-forest mb-8 opacity-20" />
+            <div className="premium-card">
+              <div className="w-16 h-16 bg-white border border-brand-green-forest/10 rounded-lg flex items-center justify-center mb-8">
+                <Globe className="w-8 h-8 text-brand-green-forest" />
+              </div>
               <h3 className="text-2xl font-display font-medium mb-4">Market Focus</h3>
               <p className="text-sm text-brand-green-deep/70 mb-8 leading-relaxed">
                 Focused on global markets, we facilitate the supply of agro commodities, industrial chemicals, industrial raw materials, and sustainable mobility solutions worldwide.
               </p>
-              <div className="flex flex-wrap gap-2">
-                {["Tanzania", "Kenya", "The Democratic Republic of Congo", "Rwanda"].map(c => (
-                  <span key={c} className="px-3 py-1 bg-brand-green-forest text-white text-[10px] uppercase font-bold tracking-widest">{c}</span>
-                ))}
-              </div>
             </div>
             <div className="premium-card border-brand-gold/20">
               <PackageCheck className="w-12 h-12 text-brand-gold mb-8" />
