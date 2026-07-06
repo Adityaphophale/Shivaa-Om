@@ -109,22 +109,31 @@ export default function Home() {
       </section>
 
       {/* Ticker */}
-      <div className="bg-brand-gold py-5 overflow-hidden border-y border-brand-green-forest/10 z-20 relative">
-        <motion.div 
-          animate={{ x: [0, -1500] }}
-          transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
-          className="flex whitespace-nowrap gap-16 items-center"
-        >
-          {Array(15).fill([
-            "IEC REGISTERED", "AGRO COMMODITIES", "ELECTRIC MOBILITY", "CHEMICALS", "MERCHANT TRADING", "NAVI MUMBAI HUB"
-          ]).flat().map((item, i) => (
-            <div key={i} className="flex items-center gap-4">
-              <ShieldCheck className="w-4 h-4 text-brand-green-deep" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-green-deep">{item}</span>
-              <span className="text-brand-green-deep/20 mx-4">×</span>
-            </div>
-          ))}
-        </motion.div>
+      <div className="ticker z-20">
+        <div className="ticker-inner">
+          <div className="ticker-track" aria-hidden="false">
+            {[
+              "IEC REGISTERED", "AGRO COMMODITIES", "ELECTRIC MOBILITY", "CHEMICALS", "MERCHANT TRADING", "NAVI MUMBAI HUB"
+            ].map((item, i) => (
+              <div key={`a-${i}`} className="ticker-item">
+                <ShieldCheck className="w-4 h-4 text-brand-green-deep" />
+                <span className="text-[10px] sm:text-sm font-bold uppercase tracking-[0.25em] text-brand-green-deep">{item}</span>
+                <span className="dot-sep text-brand-green-deep/20">×</span>
+              </div>
+            ))}
+
+            {/* duplicate for continuous seamless scroll */}
+            {[
+              "IEC REGISTERED", "AGRO COMMODITIES", "ELECTRIC MOBILITY", "CHEMICALS", "MERCHANT TRADING", "NAVI MUMBAI HUB"
+            ].map((item, i) => (
+              <div key={`b-${i}`} className="ticker-item" aria-hidden="true">
+                <ShieldCheck className="w-4 h-4 text-brand-green-deep" />
+                <span className="text-[10px] sm:text-sm font-bold uppercase tracking-[0.25em] text-brand-green-deep">{item}</span>
+                <span className="dot-sep text-brand-green-deep/20">×</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Main Focus Areas */}
@@ -272,23 +281,23 @@ export default function Home() {
       </section>
 
       {/* Unified CTA */}
-      <section className="bg-brand-gold py-24">
+      <section className="bg-brand-green-forest py-24">
          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-7xl font-display font-medium text-brand-green-deep mb-8 leading-[0.9] tracking-tighter">
-              TRADE BEYOND <br /> <span>BOUNDARIES</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-display font-medium text-brand-gold mb-8 leading-tight tracking-tight">
+              Ready to Expand Your Global Business?
             </h2>
-            <p className="text-brand-green-deep/70 mb-12 max-w-xl mx-auto text-sm leading-relaxed uppercase tracking-widest font-bold">
-               Professional Procurement · Secure Logistics · Global Fulfillment
+            <p className="text-brand-off-white/70 mb-12 max-w-2xl mx-auto text-sm leading-relaxed">
+               Connect with our export specialists for customized sourcing solutions, international trade assistance, and competitive quotations tailored to your business needs.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-               <Link to="/contact">
-                  <Button className="bg-brand-green-deep text-white hover:bg-brand-green-forest px-12 h-16 text-[10px] font-bold uppercase tracking-[0.2em] rounded-none">
-                    Contact Trade Desk
+               <Link to="/enquiry">
+                  <Button className="bg-brand-gold text-brand-green-deep hover:bg-white px-12 h-16 text-[10px] font-bold uppercase tracking-[0.2em] rounded-none w-full sm:w-auto">
+                    Request a Quote
                   </Button>
                </Link>
-               <Link to="/enquiry">
-                  <Button variant="outline" className="border-brand-green-deep/20 text-brand-green-deep hover:bg-white/20 px-12 h-16 text-[10px] font-bold uppercase tracking-[0.2em] rounded-none">
-                    Submit RFQ
+               <Link to="/contact">
+                  <Button variant="outline" className="border-white/30 text-white hover:bg-white hover:text-brand-green-deep px-12 h-16 text-[10px] font-bold uppercase tracking-[0.2em] rounded-none w-full sm:w-auto">
+                    Contact Us
                   </Button>
                </Link>
             </div>
@@ -297,4 +306,3 @@ export default function Home() {
     </div>
   );
 }
-

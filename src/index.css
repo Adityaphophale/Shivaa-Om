@@ -198,3 +198,56 @@
     @apply font-sans;
     }
 }
+
+/* Ticker / marquee styles */
+.ticker {
+  @apply overflow-hidden relative border-y border-brand-green-forest/10 bg-brand-gold;
+  height: 56px; /* fixed height to prevent layout shifts */
+  display: flex;
+  align-items: center; /* vertical center */
+}
+.ticker-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  white-space: nowrap;
+  padding: 0 1.25rem; /* consistent horizontal padding */
+  box-sizing: border-box;
+}
+.ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 36s linear infinite;
+  min-width: max-content; /* ensure track fits its content without shrinking */
+}
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  line-height: 1; /* prevent vertical misalignment */
+  flex: 0 0 auto; /* prevent items from shrinking/overlapping */
+}
+.ticker-item .dot-sep {
+  opacity: 0.2;
+  margin: 0 0.5rem;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .ticker { height: 60px; }
+  .ticker-inner { padding: 0 2rem; }
+  .ticker-item span { font-size: 0.9rem; }
+}
+@media (min-width: 1024px) {
+  .ticker { height: 64px; }
+  .ticker-item span { font-size: 1rem; }
+}
