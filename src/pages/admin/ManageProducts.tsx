@@ -211,7 +211,7 @@ export default function ManageProducts() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-brand-green-deep/60">Route</label>
-                    <Input name="route" value={formData.route} onChange={handleFormChange} className={`rounded-none ${errors.route ? 'border-red-500' : ''}`} placeholder="e.g. India → Africa" />
+                    <Input name="route" value={formData.route} onChange={handleFormChange} className={`rounded-none ${errors.route ? 'border-red-500' : ''}`} placeholder="e.g.India - Global markets" />
                     {errors.route && <p className="text-red-500 text-xs mt-1">{errors.route}</p>}
                   </div>
                 </div>

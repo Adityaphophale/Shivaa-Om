@@ -6,7 +6,7 @@ export default function Export() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-24">
         <div className="magazine-header">
           <span>Core Trade Mode</span>
-          <span>India → Africa</span>
+          <span>India - Global Markets</span>
         </div>
         <div className="editorial-split text-brand-green-deep">
           <div className="py-12 lg:pr-24">
