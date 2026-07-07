@@ -276,16 +276,10 @@ Thank you.`;
                     Product Interest *
                   </label>
 
-                  <Select onValueChange={(val: string) => {
-                    setFormData({...formData, productInterest: val});
-                    if (val) {
-                      setErrors(prev => {
-                        const newErrors = {...prev};
-                        delete newErrors.productInterest;
-                        return newErrors;
-                      });
-                    }
-                  }}>
+                  <Select
+                    value={formData.productInterest}
+                    onValueChange={(value) => setFormData({ ...formData, productInterest: value })}
+                  >
                     <SelectTrigger onBlur={() => validate('productInterest')} className={`bg-transparent text-white border-0 border-b rounded-none focus:border-brand-gold focus:ring-0 px-0 h-10 w-full ${errors.productInterest ? 'border-red-500' : 'border-white/20'}`}>
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>

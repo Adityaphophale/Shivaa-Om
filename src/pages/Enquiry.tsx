@@ -198,17 +198,7 @@ Thank you.`;
                     </div>
                     <div className="space-y-2">
                        <label className="text-[10px] uppercase font-bold tracking-widest text-brand-green-forest/40 ml-1">Product Interest *</label>
-                       <Select value={formData.productInterest} onValueChange={(val) => {
-                         setFormData({...formData, productInterest: val || ""});
-                         // We need to validate on change for Select
-                         if (val) {
-                           setErrors(prev => {
-                             const newErrors = {...prev};
-                             delete newErrors.productInterest;
-                             return newErrors;
-                           });
-                         }
-                       }}>
+                       <Select value={formData.productInterest} onValueChange={(value) => setFormData({ ...formData, productInterest: value })}>
                           <SelectTrigger onBlur={() => validate('productInterest')} className={`h-12 border-brand-green-forest/10 focus:border-brand-green-forest bg-brand-off-white/50 rounded-none ${errors.productInterest ? 'border-red-500' : ''}`}>
                             <SelectValue placeholder="Select Category" />
                           </SelectTrigger>
