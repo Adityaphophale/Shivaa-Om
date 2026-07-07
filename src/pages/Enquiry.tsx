@@ -204,9 +204,10 @@ Thank you.`;
                           </SelectTrigger>
                           <SelectContent className="bg-white border-brand-green-forest/10 rounded-none">
                             <SelectItem value="Agro Commodities">Agro Commodities</SelectItem>
-                            <SelectItem value="Electric Mobility">Electric Mobility</SelectItem>
-                            <SelectItem value="Industrial Products">Industrial Products</SelectItem>
                             <SelectItem value="Chemicals">Chemicals</SelectItem>
+                            <SelectItem value="Industrial Products">Industrial Products</SelectItem>
+                            <SelectItem value="Electric Mobility">Electric Mobility</SelectItem>
+                            <SelectItem value="Consumer Goods">Consumer Goods</SelectItem>
                             <SelectItem value="Polymers">Polymers</SelectItem>
                             <SelectItem value="Merchant Trading">Merchant Trading</SelectItem>
                           </SelectContent>

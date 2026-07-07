@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { PRODUCTS } from "@/lib/content";
 
-const CATEGORIES = ["All", "Agro Commodities", "Electric Mobility", "Industrial Products", "Chemicals"];
+const CATEGORIES = ["All", "Agro Commodities", "Chemicals", "Industrial Products", "Electric Mobility", "Consumer Goods"];
 
 export default function Products() {
   const [products, setProducts] = useState<any[]>([]);
@@ -164,7 +164,7 @@ export default function Products() {
                           {product.name}
                         </h3>
                       </Link>
-                      <p className="text-sm text-brand-green-deep/70 leading-relaxed mb-8 line-clamp-3">
+                      <p className="text-sm text-brand-green-deep/70 leading-relaxed mb-8">
                         {product.description}
                       </p>
                    </div>

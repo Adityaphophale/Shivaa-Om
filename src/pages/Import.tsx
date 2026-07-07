@@ -70,8 +70,6 @@ export default function Import() {
               {[
   "Citric Acid (Anhydrous/Monohydrate)",
   "Malic Acid",
-  "Sorbic Acid",
-  "Xanthan Gum",
   "Shoes",
   "Apparels",
   "Luggages",
