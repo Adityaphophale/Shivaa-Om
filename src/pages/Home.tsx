@@ -50,11 +50,11 @@ export default function Home() {
               <Link to="/products" className="w-full sm:w-auto">
               
                 <Button
-  variant="outline"
-  className="w-full sm:w-auto border-white text-brand-gold hover:bg-white hover:text-brand-green-deep px-10 h-16 text-sm sm:text-base font-bold uppercase tracking-[0.08em] sm:tracking-[0.15em] rounded-none transition-all"
->
-  Catalog
-</Button>
+                  variant="outline"
+                  className="bg-transparent w-full sm:w-auto border-white text-brand-gold hover:bg-white hover:text-brand-green-deep px-10 h-16 text-sm sm:text-base font-bold uppercase tracking-[0.08em] sm:tracking-[0.15em] rounded-none transition-all"
+                >
+                  Catalog
+                </Button>
               </Link>
             </div>
           </motion.div>
@@ -296,7 +296,7 @@ export default function Home() {
                   </Button>
                </Link>
                <Link to="/contact">
-                  <Button variant="outline" className="border-white/30 text-white hover:bg-white hover:text-brand-green-deep px-12 h-16 text-[10px] font-bold uppercase tracking-[0.2em] rounded-none w-full sm:w-auto">
+                  <Button variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white hover:text-brand-green-deep px-12 h-16 text-[10px] font-bold uppercase tracking-[0.2em] rounded-none w-full sm:w-auto">
                     Contact Us
                   </Button>
                </Link>
