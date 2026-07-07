@@ -46,7 +46,7 @@ export default function BlogPost() {
   }
 
   return (
-    <div className="pt-32 pb-24 bg-white">
+    <div className="pt-24 pb-16 bg-white">
       <section className="max-w-3xl mx-auto px-4 sm:px-6">
         <Link to="/blog" className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-brand-green-deep/50 hover:text-brand-green-forest mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Insights

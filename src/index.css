@@ -220,7 +220,7 @@
   align-items: center;
   gap: 3.5rem;
   white-space: nowrap;
-  will-change: transform;
+  will-change: transform; 
   animation: marquee 36s linear infinite;
   min-width: max-content; /* ensure track fits its content without shrinking */
 }
@@ -228,7 +228,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  line-height: 1; /* prevent vertical misalignment */
+  line-height: 1; /* prevent vertical misalignment */ 
   flex: 0 0 auto; /* prevent items from shrinking/overlapping */
 }
 .ticker-item .dot-sep {

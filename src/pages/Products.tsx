@@ -75,8 +75,8 @@ export default function Products() {
   });
 
   return (
-    <div className="pt-20 pb-24 min-h-screen bg-brand-off-white">
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="pt-24 pb-16 min-h-screen bg-brand-off-white">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-16">
          <div className="mb-20">
          <div className="magazine-header !mb-6">
            <span>Product Catalog</span>
@@ -89,7 +89,7 @@ export default function Products() {
           </p>
         </div>
 
-        <div className="flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center mb-16">
+        <div className="flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-center mb-12">
            <div className="flex flex-wrap gap-2">
              {CATEGORIES.map(cat => (
                <button
@@ -202,7 +202,7 @@ export default function Products() {
         )}
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 mt-32">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6">
          <div className="bg-brand-green-deep p-8 sm:p-12 lg:p-20 text-white text-center relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-green-forest/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />

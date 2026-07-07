@@ -137,7 +137,7 @@ export default function Home() {
       </div>
 
       {/* Main Focus Areas */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-32">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
         <div className="magazine-header">
            <span>Core Verticals</span>
            <span>Merchant Services</span>
@@ -175,7 +175,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products Preview */}
-      <section className="bg-brand-green-deep py-32 text-white relative">
+      <section className="bg-brand-green-deep py-16 lg:py-20 text-white relative">
          <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="flex flex-col gap-6 lg:flex-row justify-between items-end mb-20 gap-8">
                <div className="lg:w-1/2">
@@ -219,7 +219,7 @@ export default function Home() {
       </section>
 
       {/* Global Reach Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-32">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
          <div className="editorial-split bg-white border border-brand-green-forest/10 p-0 overflow-hidden">
             <div className="p-12 lg:p-24 flex flex-col justify-center">
                <span className="text-brand-green-forest/40 text-[10px] font-bold uppercase tracking-[0.4em] block mb-8">Our Presence</span>
@@ -281,7 +281,7 @@ export default function Home() {
       </section>
 
       {/* Unified CTA */}
-      <section className="bg-brand-green-forest py-24">
+      <section className="bg-brand-green-forest py-16 lg:py-20">
          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <h2 className="text-3xl sm:text-4xl lg:text-6xl font-display font-medium text-brand-gold mb-8 leading-tight tracking-tight">
               Ready to Expand Your Global Business?

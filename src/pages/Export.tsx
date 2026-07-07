@@ -2,22 +2,22 @@ import { Ship, Globe, PackageCheck, Zap, ShieldCheck, ArrowRight, Truck } from "
 
 export default function Export() {
   return (
-    <div className="pt-32 pb-24">
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-24">
+    <div className="pt-24 pb-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-16">
         <div className="magazine-header">
           <span>Core Trade Mode</span>
           <span>India - Global Markets</span>
         </div>
         <div className="editorial-split text-brand-green-deep">
-          <div className="py-12 lg:pr-24">
-            <h1 className="text-4xl sm:text-5xl lg:text-8xl font-medium leading-[0.9] mb-12">
+          <div className="py-4 lg:py-0 lg:pr-16">
+            <h1 className="text-4xl sm:text-5xl lg:text-8xl font-medium leading-[0.9] mb-8">
               Empowering <span className="text-brand-green-forest">Global markets</span> With Indian Quality
             </h1>
-            <p className="text-xl leading-relaxed text-brand-green-deep/80 mb-12">
+            <p className="text-lg lg:text-xl leading-relaxed text-brand-green-deep/80 mb-8 max-w-2xl">
               Shivaa Om Globe Trade specializes in exporting high-demand agricultural and industrial products from India to dynamic global markets.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {["Sugar S30 / Brown", "Extra Neutral Alcohol", "Molasses", "E-Rickshaws", "E-Bikes", "Polymers"].map(product => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {["Sugar S30 / Brown", "Extra Neutral Alcohol", "Molasses", "E-Rickshaws", "E-Bikes", "Polymers","Indian Spices & Masalas"].map(product => (
                 <div key={product} className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-brand-green-forest">
                   <div className="w-1 h-1 bg-brand-gold rounded-full" />
                   {product}
@@ -32,7 +32,7 @@ export default function Export() {
     className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 z-0"
   />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center p-12">
+              <div className="text-center p-8 lg:p-10">
                 <div className="w-20 h-20 bg-brand-gold/90 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
                   <Ship className="w-10 h-10 text-brand-green-deep" />
                 </div>
@@ -56,9 +56,9 @@ export default function Export() {
       </section>
 
 {/* Stats / Highlights */}
-<section className="bg-brand-green-deep py-20 mb-24">
+<section className="bg-brand-green-deep py-14 lg:py-16 mb-16">
   <div className="max-w-7xl mx-auto px-4 sm:px-6">
-    <div className="flex flex-col sm:flex-row justify-center items-center gap-16 lg:gap-32">
+    <div className="flex flex-col sm:flex-row justify-center items-center gap-10 lg:gap-24">
       {[
         { val: "100%", label: "Compliance Rate" },
         { val: "24/7", label: "Trade Support" },
@@ -77,24 +77,24 @@ export default function Export() {
 </section>
 
       {/* Logistics Excellence */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="magazine-header">
           <span>Operational Strength</span>
           <span>Export Logistics</span>
         </div>
-        <div className="grid lg:grid-cols-2 gap-24">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20">
           <div>
-            <h2 className="text-4xl font-medium mb-12 text-brand-green-forest leading-tight">
+            <h2 className="text-4xl font-medium mb-8 text-brand-green-forest leading-tight">
               Reliable Sourcing. <br />
               Global Distribution.
             </h2>
-            <div className="space-y-12">
+            <div className="space-y-8">
               {[
                 { icon: ShieldCheck, title: "Pre-Shipment Inspection", desc: "Rigorous quality checks at source before cargo is port-bound." },
                 { icon: Truck, title: "Multimodal Transport", desc: "Coordinated rail and road logistics to major Indian Ports" },
                 { icon: zap, title: "Swift Documentation", desc: "Ensuring all export permits, LC compliance, and shipping docs are handled with precision." }
               ].map((item, i) => (
-                <div key={i} className="flex gap-6 group">
+                <div key={i} className="flex gap-4 group">
                   <div className="w-14 h-14 bg-brand-beige flex items-center justify-center shrink-0 group-hover:bg-brand-gold transition-colors">
                     {item.icon && <item.icon className="w-6 h-6 text-brand-green-forest" />}
                   </div>
@@ -106,7 +106,7 @@ export default function Export() {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-8">
+          <div className="grid grid-cols-1 gap-6">
             <div className="premium-card">
               <div className="w-16 h-16 bg-white border border-brand-green-forest/10 rounded-lg flex items-center justify-center mb-8">
                 <Globe className="w-8 h-8 text-brand-green-forest" />

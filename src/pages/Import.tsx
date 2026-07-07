@@ -37,10 +37,10 @@ const WORKFLOW = [
 
 export default function Import() {
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-24 pb-16">
 
       {/* HERO SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-16">
 
         <div className="magazine-header">
           <span>Core Trade Mode</span>
@@ -50,9 +50,9 @@ export default function Import() {
         <div className="editorial-split text-brand-green-deep">
 
           {/* LEFT CONTENT */}
-          <div className="py-12 lg:pr-24">
+          <div className="lg:pr-20">
 
-            <h1 className="text-4xl sm:text-5xl lg:text-8xl font-medium leading-[0.9] mb-12">
+            <h1 className="text-4xl sm:text-5xl lg:text-8xl font-medium leading-[0.9] mb-8">
               Bridging{" "}
               <span className="text-brand-green-forest">
                 Global
@@ -60,19 +60,24 @@ export default function Import() {
               Supply Chains
             </h1>
 
-            <p className="text-xl leading-relaxed text-brand-green-deep/80 mb-12">
+            <p className="text-xl leading-relaxed text-brand-green-deep/80 mb-8">
               We import high-quality industrial raw materials and food-grade chemicals to support domestic manufacturing and industrial operations. Our reliable global supply network also enables us to serve international markets, ensuring consistent quality, timely delivery, and dependable supply across multiple industries.
             </p>
 
             {/* PRODUCT LIST */}
-            <div className="space-y-5">
+            <div className="space-y-3">
 
               {[
-                "Citric Acid (Anhydrous/Monohydrate)",
-                "Malic Acid",
-                "Sorbic Acid",
-                "Xanthan Gum",
-              ].map((product) => (
+  "Citric Acid (Anhydrous/Monohydrate)",
+  "Malic Acid",
+  "Sorbic Acid",
+  "Xanthan Gum",
+  "Shoes",
+  "Apparels",
+  "Luggages",
+  "Cosmetics",
+  "Perfumes",
+].map((product) => (
                 <div
                   key={product}
                   className="flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-brand-green-forest"
@@ -86,10 +91,10 @@ export default function Import() {
           </div>
 
           {/* RIGHT CONTENT */}
-          <div className="bg-brand-green-deep p-8 sm:p-12 lg:p-20 text-white flex flex-col justify-center">
+          <div className="bg-brand-green-deep p-8 sm:p-10 lg:p-14 text-white flex flex-col justify-center">
 
             {/* BOX 1 */}
-            <div className="mb-12">
+            <div className="mb-8">
 
               <Search className="w-12 h-12 text-brand-gold mb-8" />
 
@@ -125,7 +130,7 @@ export default function Import() {
       </section>
 
       {/* WORKFLOW SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-24 border-t border-brand-green-forest/10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16 border-t border-brand-green-forest/10">
 
         <div className="magazine-header">
           <span>The Process</span>
@@ -133,16 +138,16 @@ export default function Import() {
         </div>
 
         {/* WORKFLOW GRID */}
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8 mt-16">
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8 mt-10">
 
           {WORKFLOW.map((step) => (
             <div
               key={step.id}
-              className="relative group bg-white border border-brand-green-forest/10 p-10 min-h-[320px] transition-all duration-500 overflow-hidden"
+              className="relative group bg-white border border-brand-green-forest/10 p-8 min-h-[280px] transition-all duration-500 overflow-hidden"
             >
 
               {/* STEP BADGE */}
-              <div className="relative z-10 w-16 h-16 rounded-full border border-brand-gold/30 bg-brand-green-forest flex items-center justify-center mb-10">
+              <div className="relative z-10 w-16 h-16 rounded-full border border-brand-gold/30 bg-brand-green-forest flex items-center justify-center mb-6">
 
                 <span className="text-white text-lg font-bold">
                   {step.id}
@@ -150,7 +155,7 @@ export default function Import() {
               </div>
 
               {/* TITLE */}
-              <h3 className="relative z-10 text-2xl font-display font-semibold mb-6 text-brand-green-deep">
+              <h3 className="relative z-10 text-2xl font-display font-semibold mb-4 text-brand-green-deep">
                 {step.title}
               </h3>
 
@@ -169,7 +174,7 @@ export default function Import() {
       </section>
 
       {/* EXPERTISE SECTION */}
-      <section className="bg-brand-beige py-24">
+      <section className="bg-brand-beige py-16 lg:py-20">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-3 gap-8">
 
@@ -197,7 +202,7 @@ export default function Import() {
           ].map((box, i) => (
             <div
               key={i}
-              className="bg-white p-12 border border-brand-green-forest/5 transition-all duration-500"
+              className="bg-white p-8 lg:p-10 border border-brand-green-forest/5 transition-all duration-500"
             >
 
               <box.icon className="w-10 h-10 text-brand-green-forest mb-8" />

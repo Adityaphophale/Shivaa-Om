@@ -23,14 +23,14 @@ export default function TradeActivities() {
   };
 
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-24 pb-16">
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="magazine-header">
            <span>Global Operations</span>
            <span>Activity Feed</span>
         </div>
 
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-10">
            {ACTIVITIES.slice(0, visibleCount).map((activity, i) => (
              <motion.div 
                initial={{ opacity: 0, y: 20 }}
@@ -67,9 +67,8 @@ export default function TradeActivities() {
              </motion.div>
            ))}
         </div>
-
         {visibleCount < ACTIVITIES.length && (
-          <div className="mt-20 text-center">
+          <div className="mt-12 text-center">
             <Button 
               onClick={handleLoadMore}
               variant="outline" 
@@ -83,7 +82,7 @@ export default function TradeActivities() {
       </section>
 
          {/* Contact / Quote Call to Action */}
-         <section className="bg-brand-green-forest mt-24 py-20 text-white">
+         <section className="bg-brand-green-forest mt-16 py-16 lg:py-20 text-white">
              <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
                   <h2 className="text-3xl sm:text-4xl font-display font-bold mb-6">Ready to Expand Your Global Business?</h2>
                   <p className="text-brand-off-white/90 mb-10 max-w-xl mx-auto text-sm leading-relaxed">
@@ -93,7 +92,7 @@ export default function TradeActivities() {
                       <Link to="/enquiry" className="w-full sm:w-auto">
                          <Button aria-label="Request a Quote" className="bg-brand-green-deep text-white hover:bg-brand-green-forest h-14 px-10 rounded-none uppercase text-sm font-bold tracking-widest w-full sm:w-auto shadow-lg">
                             Request a Quote
-                         </Button>
+                         </Button> 
                       </Link>
 
                       <Link to="/contact" className="w-full sm:w-auto">

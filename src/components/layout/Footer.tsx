@@ -20,8 +20,8 @@ const CORE_TRADE_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-green-deep text-brand-off-white pt-20 pb-10 text-center md:text-left relative z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
+    <footer className="bg-brand-green-deep text-brand-off-white pt-16 lg:pt-20 pb-10 text-center md:text-left relative z-40">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-16">
         {/* Column 1: Company Info */}
         <div className="flex flex-col items-center md:items-start">
            <div className="mb-6 text-center md:text-left">
@@ -69,7 +69,7 @@ export default function Footer() {
         {/* Column 4: Contact Us */}
         <div className="flex flex-col items-center md:items-start">
            <h4 className="font-display text-lg mb-8 uppercase tracking-widest text-brand-gold">Contact Us</h4>
-           <div className="space-y-6">
+           <div className="space-y-5">
               <a href="https://www.google.com/maps/search/?api=1&query=19.0262789,73.0903117" target="_blank" rel="noopener noreferrer" className="flex gap-4 text-left hover:opacity-80 transition-opacity duration-300">
                  <div className="w-10 h-10 bg-brand-green-forest rounded-lg flex items-center justify-center shrink-0">
                     <MapPin className="w-5 h-5 text-brand-gold" />
@@ -102,7 +102,7 @@ export default function Footer() {
       </div>
 
       {/* Footer Bottom */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex flex-col items-center md:items-start gap-3 text-center md:text-left">
           <p className="text-xs text-brand-off-white/40">
             © {new Date().getFullYear()} Shivaa Om Globe Trade Private Limited. All rights reserved. Registered IEC Company.

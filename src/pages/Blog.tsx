@@ -1,4 +1,4 @@
-﻿﻿import { useState } from "react";
+﻿﻿﻿﻿﻿﻿import { useState } from "react";
 import { motion } from "motion/react";
 import {
   ArrowRight,
@@ -27,11 +27,11 @@ export default function Blog() {
   const regularBlogs = blogs.length > 1 ? blogs.slice(1) : [];
 
   return (
-    <div className="pt-32 pb-24 bg-white">
+    <div className="pt-24 pb-16 bg-white">
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
-        <div className="magazine-header mb-16">
+        <div className="magazine-header">
           <span>Insights & News</span>
           <span>Merchant Ledger</span>
         </div>
@@ -42,7 +42,7 @@ export default function Blog() {
           <>
             {/* FEATURED BLOG */}
             {featuredBlog && (
-              <div className="editorial-split mb-24 border border-brand-green-forest/10 bg-white overflow-hidden rounded-sm shadow-sm">
+              <div className="editorial-split mb-16 border border-brand-green-forest/10 bg-white overflow-hidden rounded-sm shadow-sm">
                 {/* LEFT IMAGE */}
                 <div className="relative min-h-[550px] overflow-hidden group">
                   <img
@@ -53,7 +53,7 @@ export default function Blog() {
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                   {/* Hero Content */}
-                  <div className="absolute bottom-12 left-10 right-10">
+                  <div className="absolute bottom-10 left-10 right-10">
                     <div className="uppercase tracking-[0.35em] text-[10px] font-bold text-brand-gold mb-5">
                       Featured Article
                     </div>
@@ -64,7 +64,7 @@ export default function Blog() {
                 </div>
 
                 {/* RIGHT CONTENT */}
-                <div className="p-10 lg:p-20 flex flex-col justify-center bg-brand-beige">
+                <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center bg-brand-beige">
                   <div className="uppercase tracking-[0.35em] text-[10px] font-bold text-brand-green-forest mb-6">
                     {featuredBlog.category}
                   </div>
@@ -85,7 +85,7 @@ export default function Blog() {
                   <Link to={"/blog/" + featuredBlog.slug}>
                     <Button
                       variant="link"
-                      className="text-brand-green-forest p-0 h-auto self-start uppercase text-[10px] tracking-[0.3em] font-bold mt-10 group"
+                      className="text-brand-green-forest p-0 h-auto self-start uppercase text-[10px] tracking-[0.3em] font-bold mt-8 group"
                     >
                       Read Full Publication
                       <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -97,7 +97,7 @@ export default function Blog() {
 
             {/* BLOG GRID */}
             {regularBlogs.length > 0 && (
-              <div className="grid md:grid-cols-3 gap-12 mb-24">
+              <div className="grid md:grid-cols-3 gap-8 mb-16">
                 {regularBlogs.map((post: any, i: number) => (
                   <motion.article
                     initial={{ opacity: 0, y: 20 }}
@@ -138,7 +138,7 @@ export default function Blog() {
         )}
 
         {/* CATEGORY SECTION */}
-        <div className="bg-brand-green-deep p-12 text-white flex flex-col md:flex-row justify-between items-center gap-8 border-t border-brand-gold">
+        <div className="bg-brand-green-deep p-10 text-white flex flex-col md:flex-row justify-between items-center gap-8 border-t border-brand-gold">
           <div>
             <h4 className="text-xl font-display uppercase tracking-widest text-brand-gold mb-2">
               Explore By Category

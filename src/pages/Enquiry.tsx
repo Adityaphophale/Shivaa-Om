@@ -136,8 +136,8 @@ Thank you.`;
   }
 
   return (
-    <div className="pt-32 pb-24 lg:pb-0">
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 mb-24">
+    <div className="pt-24 pb-16 lg:pt-32 lg:pb-24">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="magazine-header">
            <span>Request For Quotation</span>
            <span>Global Trade Desk</span>

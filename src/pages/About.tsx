@@ -3,24 +3,24 @@ import { Target, Eye, ShieldCheck, Zap, Handshake, Globe2 } from "lucide-react";
 
 export default function About() {
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-24 pb-16 lg:pb-20">
       {/* Editorial Header */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-24">
-          <div className="magazine-header mb-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-16">
+          <div className="magazine-header">
             <span className="text-xs uppercase tracking-widest text-brand-gold">The Company</span>
           </div>
 
           <p className="max-w-3xl text-lg text-brand-green-deep/80 mb-8">
            Connecting producers and buyers across continents with integrity, market expertise, and dependable logistics — delivering value across agro, industrial chemicals, and electric mobility sectors.
           </p>
-        <div className="editorial-split">
-          <div className="py-12 lg:pr-24">
-            <h1 className="text-4xl sm:text-5xl lg:text-8xl font-medium leading-[0.9] mb-12">
+        <div className="editorial-split pt-8">
+          <div className="py-10 lg:py-12 lg:pr-20">
+            <h1 className="text-4xl sm:text-5xl lg:text-8xl font-medium leading-[0.9] mb-8">
               Driven By <span className="text-brand-green-forest">Integrity</span>, <br />
               Powered By <span className="text-brand-gold font-display">Global Reach</span>
             </h1>
           </div>
-          <div className="py-12 flex flex-col justify-center">
+          <div className="py-10 lg:py-12 flex flex-col justify-center">
             <p className="text-xl text-brand-green-deep/80 leading-relaxed mb-8">
               Shivaa Om Globe Trade Private Limited is a dynamic international trading and export-import company engaged in the global supply of agricultural commodities, industrial chemicals, polymers, and electric mobility products.
             </p>
@@ -32,8 +32,8 @@ export default function About() {
       </section>
 
       {/* Vision & Mission */}
-      <section className="bg-brand-green-deep text-white py-24 mb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-24">
+      <section className="bg-brand-green-deep text-white py-16 lg:py-20 mb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-12 lg:gap-16">
           <div>
             <div className="flex items-center gap-4 mb-8">
               <Eye className="w-8 h-8 text-brand-gold" />
@@ -48,7 +48,7 @@ export default function About() {
               <Target className="w-8 h-8 text-brand-gold" />
               <h2 className="text-3xl uppercase tracking-widest text-brand-gold">Our Mission</h2>
             </div>
-            <ul className="space-y-6">
+            <ul className="space-y-4">
               {[
                 "To provide high-quality products at competitive prices",
                 "To establish strong and transparent business relationships worldwide",
@@ -68,7 +68,7 @@ export default function About() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
          <div className="magazine-header">
            <span>The Advantage</span>
            <span>Excellence in EXIM</span>
@@ -98,8 +98,8 @@ export default function About() {
       </section>
 
       {/* Future Expansion */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-24">
-         <div className="bg-brand-beige p-8 sm:p-12 lg:p-24 border border-brand-green-forest/5 flex flex-col lg:flex-row items-center gap-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6">
+         <div className="bg-brand-beige p-8 sm:p-12 lg:p-16 border border-brand-green-forest/5 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             <div className="lg:w-1/2">
                <h2 className="text-4xl lg:text-5xl font-medium mb-8 text-brand-green-forest">The Road <br /><span className="font-display">Ahead</span></h2>
                <p className="text-brand-green-deep/70 mb-8 leading-relaxed">

@@ -107,8 +107,8 @@ export default function Navbar() {
             <Link to="/enquiry" className="hidden lg:inline-flex">
               <Button
                 variant="outline"
-                size="sm"
-                className="border-brand-green-forest text-brand-green-forest hover:bg-brand-green-forest hover:text-white rounded-full px-5 py-3 font-semibold tracking-wide transition-all"
+                size="sm" 
+                className="border-brand-green-forest text-brand-green-forest hover:bg-brand-green-forest hover:text-white rounded-full px-5 py-2.5 font-semibold tracking-wide transition-all"
               >
                 Enquire Now
               </Button>

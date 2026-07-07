@@ -116,7 +116,7 @@ Thank you.`;
   };
 
   return (
-    <div className="pt-24 pb-16 lg:pb-0">
+    <div className="pt-24 lg:pb-0">
       <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-12">
         <div className="magazine-header">
           <span>Connect With Us</span>
@@ -325,7 +325,7 @@ Thank you.`;
       </section>
 
       {/* Quick Action Bar */}
-      <section className="bg-brand-beige py-16 mb-0">
+      <section className="bg-brand-beige py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
           
           {/* WhatsApp */}

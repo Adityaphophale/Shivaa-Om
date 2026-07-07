@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+﻿﻿import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink } from "lucide-react";
@@ -42,7 +42,7 @@ export default function ProductDetail() {
   }
 
   return (
-    <div className="pt-32 pb-24 min-h-screen bg-brand-off-white">
+    <div className="pt-24 pb-16 min-h-screen bg-brand-off-white lg:pt-32 lg:pb-24">
       <section className="max-w-5xl mx-auto px-4 sm:px-6">
         <Link to="/products" className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-brand-green-deep/50 hover:text-brand-green-forest mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Catalog
