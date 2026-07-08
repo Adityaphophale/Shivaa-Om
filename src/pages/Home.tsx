@@ -63,27 +63,32 @@ export default function Home() {
              <Globe className="max-w-full w-[260px] h-[260px] sm:w-[360px] sm:h-[360px] md:w-[520px] md:h-[520px] lg:w-[800px] lg:h-[800px]" />
           </div>
         </div>
-        
+
         <div className="flex flex-col lg:grid lg:grid-rows-[1.2fr_0.8fr]">
           <div className="relative overflow-hidden group min-h-[400px] lg:min-h-0">
-             <video 
-               src="/hero1.mp4" 
+             <video
+               src="/hero1.mp4"
                autoPlay
                loop
                muted
                playsInline
                className="object-cover absolute inset-0 h-full w-full group-hover:scale-110 transition-transform duration-1000"
              />
-             <div className="absolute inset-0 bg-black/45 group-hover:bg-black/35 transition-colors" />
-             <div className="absolute inset-0 p-8 sm:p-12 flex flex-col justify-between border-l border-white/10">
-                <div className="w-16 h-1 border-t-2 border-brand-gold"></div>
-                <div>
-                   <span className="text-brand-gold text-[10px] font-bold uppercase tracking-widest block mb-4">Core Connectivity</span>
-                   <h2 className="text-3xl sm:text-4xl text-white font-medium leading-tight uppercase font-display tracking-tight">
-                     Connecting Global Markets
-                   </h2>
-                </div>
-             </div>
+            <div className="absolute inset-0 bg-black/45 group-hover:bg-black/35 transition-colors" />
+
+            <div className="absolute inset-0 p-8 sm:p-12 flex flex-col justify-end border-l border-white/10">
+              <div className="inline-flex flex-col items-start">
+                <span className="text-brand-gold text-[10px] font-bold uppercase tracking-[0.2em] whitespace-nowrap">
+                  Core Connectivity
+                </span>
+
+                <div className="mt-2 mb-4 h-[2px] w-24 bg-brand-gold"></div>
+
+                <h2 className="text-3xl sm:text-4xl text-white font-medium leading-tight uppercase font-display tracking-tight">
+                  Connecting Global Markets
+                </h2>
+              </div>
+            </div>
           </div>
           <div className="bg-brand-beige p-8 sm:p-12 border-l border-brand-green-forest/5">
              <div className="magazine-header !mb-6">
@@ -92,11 +97,11 @@ export default function Home() {
              </div>
              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 sm:gap-x-12 gap-y-6">
                 {STATS.map((stat, i) => (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    key={stat.label} 
+                    key={stat.label}
                     className="border-b border-brand-green-forest/10 pb-4"
                   >
                     <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-green-forest/40 block mb-2">{stat.label}</span>
