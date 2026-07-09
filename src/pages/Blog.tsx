@@ -137,33 +137,7 @@ export default function Blog() {
           </>
         )}
 
-        {/* CATEGORY SECTION */}
-        <div className="bg-brand-green-deep p-10 text-white flex flex-col md:flex-row justify-between items-center gap-8 border-t border-brand-gold">
-          <div>
-            <h4 className="text-xl font-display uppercase tracking-widest text-brand-gold mb-2">
-              Explore By Category
-            </h4>
-            <p className="text-xs text-brand-off-white/40">
-              Filter insights by industry focus and trade sectors.
-            </p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              "Agro Commodities",
-              "Electric Mobility",
-              "Chemicals",
-              "Logistics",
-              "Market Trends",
-            ].map((cat) => (
-              <button
-                key={cat}
-                className="px-6 py-3 border border-white/10 hover:border-brand-gold hover:text-brand-gold text-[10px] uppercase font-bold tracking-widest transition-all"
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
+        
       </section>
     </div>
   );

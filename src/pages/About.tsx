@@ -43,11 +43,11 @@ export default function About() {
             </h1>
             
             <p className="text-lg sm:text-xl text-brand-green-deep/80 leading-relaxed font-light mb-6 border-l-4 border-brand-gold pl-6 py-1">
-              Shivaa Om Globe Trade Private Limited is a dynamic international trading and export-import partner engaged in the global supply of agricultural commodities, industrial chemicals, polymers, and sustainable mobility products.
+              Shivaa Om Globe Trade Private Limited facilitates the seamless movement of agro commodities, industrial chemicals, polymers, sustainable mobility solutions, lifestyle products, apparel, and consumer essentials across international markets. With a commitment to quality, reliability, and operational excellence, we provide end-to-end sourcing, procurement, and trade solutions tailored to the evolving needs of global businesses.
             </p>
             
             <p className="text-sm sm:text-base text-brand-green-deep/70 leading-relaxed mb-8">
-              With a strategic trade focus connecting major corridors in India, Africa, and China, the company delivers reliable sourcing, competitive pricing, and efficient logistics solutions. Our operations are built on long-term partnerships, enabling us to create sustainable value for our clients across multiple industries.
+              Driven by integrity and powered by global reach, we build lasting partnerships through transparent business practices, efficient logistics, and dependable service. Our focus on quality, compliance, and customer satisfaction enables us to create sustainable value while supporting the growth of businesses worldwide.
             </p>
           </motion.div>
 
@@ -122,11 +122,11 @@ export default function About() {
               
               <ul className="space-y-4 sm:space-y-5">
                 {[
-                  "To provide high-quality products at competitive prices",
-                  "To establish strong and transparent business relationships worldwide",
-                  "To expand trade opportunities between India, Africa, and Asia",
-                  "To contribute to sustainable and innovative trade practices"
-                ].map((item, i) => (
+  "To provide premium-quality products and reliable global sourcing solutions",
+  "To build long-term partnerships through integrity, transparency, and trust",
+  "To facilitate seamless international trade by connecting global buyers and suppliers",
+  "To promote sustainable, innovative, and responsible trade practices"
+].map((item, i) => (
                   <li key={i} className="flex gap-4 items-start group">
                     <div className="w-6 h-6 rounded-full border border-brand-gold/30 flex items-center justify-center shrink-0 mt-1 group-hover:bg-brand-gold group-hover:border-brand-gold transition-colors duration-300">
                        <ChevronRight className="w-3.5 h-3.5 text-brand-gold group-hover:text-brand-green-deep transition-colors duration-300" />

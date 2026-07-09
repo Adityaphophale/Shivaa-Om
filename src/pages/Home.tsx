@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowRight, Globe, Ship, Zap, FlaskConical, TrendingUp, ShieldCheck, Map } from "lucide-react";
+import { ArrowRight, Globe, Ship, Zap, FlaskConical, TrendingUp, ShieldCheck, Map, Box, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -11,9 +11,11 @@ const STATS = [
 ];
 
 const CATEGORIES = [
-  { title: "Agro Commodities", icon: Ship, items: ["96% ENA", "Sugar S30", "Brown Sugar", "Molasses"] },
-  { title: "Electric Mobility", icon: Zap, items: ["E-Rickshaws", "E-Bikes", "Charging Tech"] },
-  { title: "Industrial Chemicals", icon: FlaskConical, items: ["Citric Acid", "Malic Acid", "Polymers"] }
+  { title: "Agro Commodities", icon: Ship, items: ["White Refined Sugar (S30)", "Brown Sugar", "ZENITH MOLASSES", "Indian Spices & Masalas"] },
+  { title: "Chemicals", icon: FlaskConical, items: ["ZENITH ENA (96% Alcohol)", "Globichem Citric Acid", "Globichem Malic Acid"] },
+  { title: "Industrial Products", icon: Box, items: ["Shivaa Polymers (Resins)"] },
+  { title: "Electric Mobility", icon: Zap, items: ["SHIVAA E-Rickshaws", "SHIVAA E-Bikes"] },
+  { title: "Consumer Goods", icon: ShoppingBag, items: ["Premium Shoes & Apparel", "Travel Luggage", "Cosmetics & Perfumes"] }
 ];
 
 export default function Home() {
@@ -39,7 +41,7 @@ export default function Home() {
               Globally
             </h1>
             <p className="max-w-md mx-auto lg:mx-0 text-brand-off-white/70 text-sm md:text-base leading-relaxed mb-10 border-l border-brand-gold/30 pl-6 text-center lg:text-left">
-              Shivaa Om Globe Trade Pvt. Ltd. facilitates the seamless flow of agro-commodities, industrial chemicals, and sustainable mobility solutions across the world's most dynamic trade corridors.
+              Shivaa Om Globe Trade Pvt. Ltd. facilitates the seamless flow of agro-commodities, industrial chemicals, sustainable mobility solutions, Lifestyle, Apparel & Consumer Essentials  across the world's most dynamic trade corridors.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4">
               <Link to="/enquiry" className="w-full sm:w-auto">
@@ -118,8 +120,13 @@ export default function Home() {
         <div className="ticker-inner">
           <div className="ticker-track" aria-hidden="false">
             {[
-              "IEC REGISTERED", "AGRO COMMODITIES", "ELECTRIC MOBILITY", "CHEMICALS", "MERCHANT TRADING", "NAVI MUMBAI HUB"
-            ].map((item, i) => (
+  "IEC REGISTERED",
+  "GLOBAL SOURCING",
+  "IMPORT & EXPORT",
+  "AGRO COMMODITIES",
+  "INDUSTRIAL CHEMICALS",
+  "CONSUMER GOODS"
+].map((item, i) => (
               <div key={`a-${i}`} className="ticker-item">
                 <ShieldCheck className="w-4 h-4 text-brand-green-deep" />
                 <span className="text-[10px] sm:text-sm font-bold uppercase tracking-[0.25em] text-brand-green-deep">{item}</span>
@@ -197,7 +204,7 @@ export default function Home() {
                </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                {CATEGORIES.map((cat, i) => (
                  <motion.div 
                    key={i} 
