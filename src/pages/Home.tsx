@@ -36,7 +36,7 @@ export default function Home() {
             <h1 className="text-5xl sm:text-6xl lg:text-9xl leading-tight lg:leading-[0.85] mb-8 font-medium tracking-tighter drop-shadow-lg text-center lg:text-left">
               Trading <br className="hidden lg:block" />
               With <span className="text-brand-gold font-bold uppercase tracking-wide">
-  TRUST
+  Trust
 </span> <br className="hidden lg:block" />
               Globally
             </h1>
@@ -257,7 +257,7 @@ export default function Home() {
     </p>
 
     <p className="text-sm font-bold text-brand-green-deep uppercase leading-[2]">
-      JNPT - Kandla - Mundra - Dar Es Salaam - Mombasa - Matadi
+      Presence in every major global port
     </p>
   </div>
 
