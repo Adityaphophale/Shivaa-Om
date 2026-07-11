@@ -41,7 +41,7 @@ export default function Home() {
               Globally
             </h1>
             <p className="max-w-md mx-auto lg:mx-0 text-brand-off-white/70 text-sm md:text-base leading-relaxed mb-10 border-l border-brand-gold/30 pl-6 text-center lg:text-left">
-              Shivaa Om Globe Trade Pvt. Ltd. facilitates the seamless flow of agro-commodities, industrial chemicals, sustainable mobility solutions, Lifestyle, Apparel & Consumer Essentials  across the world's most dynamic trade corridors.
+              Shivaa Om Globe Trade Pvt. Ltd. facilitates the seamless flow of Agro Commodities, Industrial Chemicals, Sustainable Mobility Solutions, Lifestyle, Apparel & Consumer Essentials across the world's most dynamic trade corridors
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4">
               <Link to="/enquiry" className="w-full sm:w-auto">

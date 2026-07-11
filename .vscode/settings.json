@@ -1,0 +1,4 @@
+{
+    "opilot.completionModel": "gemma4:latest",
+    "opilot.enableInlineCompletions": false
+}
