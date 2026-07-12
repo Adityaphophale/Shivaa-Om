@@ -74,7 +74,7 @@ export default function Home() {
                loop
                muted
                playsInline
-               className="object-cover absolute inset-0 h-full w-full group-hover:scale-110 transition-transform duration-1000"
+               className="object-cover absolute inset-0 h-full w-full group-hover:scale-105 transition-transform duration-1000"
              />
             <div className="absolute inset-0 bg-black/45 group-hover:bg-black/35 transition-colors" />
 
