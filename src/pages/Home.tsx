@@ -189,7 +189,7 @@ export default function Home() {
       {/* Featured Products Preview */}
       <section className="bg-brand-green-deep py-16 lg:py-20 text-white relative">
          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="flex flex-col gap-6 lg:flex-row justify-between items-end mb-20 gap-8">
+            <div className="flex flex-col gap-6 lg:flex-row justify-between items-start lg:items-end mb-20">
                <div className="lg:w-1/2">
                   <span className="text-brand-gold text-[10px] font-bold uppercase tracking-[0.4em] block mb-4">The Catalog</span>
                   <h2 className="text-3xl sm:text-4xl lg:text-7xl font-medium font-display leading-[1.1]">Featured <br /><span>Commodities</span></h2>
